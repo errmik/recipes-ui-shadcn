@@ -1,0 +1,30 @@
+{
+  "Lang": {
+    "fr": "Français",
+    "en": "Anglais",
+    "de": "Allemand"
+  },
+  "Theme": {
+    "Theme": "Thème",
+    "light": "Clair",
+    "dark": "Sombre",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "discord": "Discord",
+    "netflix": "Netflix",
+    "twilight": "Twilight",
+    "reddit": "Reddit",
+    "system": "Système"
+  },
+  "Header": {
+    "About": "A propos",
+    "Blog": "Blog",
+    "Recipes": "Recettes"
+  },
+  "About": {
+    "about": "A propos"
+  },
+  "Blog": {
+    "blog": "Blogue"
+  }
+}

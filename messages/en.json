@@ -1,0 +1,33 @@
+{
+  "Lang": {
+    "fr": "French",
+    "en": "English",
+    "de": "Deutch"
+  },
+  "Theme": {
+    "Theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "discord": "Discord",
+    "netflix": "Netflix",
+    "twilight": "Twilight",
+    "reddit": "Reddit",
+    "system": "System"
+  },
+  "Header": {
+    "About": "About",
+    "Blog": "Blog",
+    "Recipes": "Recipes"
+  },
+  "About": {
+    "about": "About"
+  },
+  "Blog": {
+    "blog": "Blog"
+  },
+  "Recipes": {
+    "title": "Recipes"
+  }
+}

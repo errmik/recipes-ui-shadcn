@@ -1,0 +1,1 @@
+This is the directory where shad-cn generates its components
