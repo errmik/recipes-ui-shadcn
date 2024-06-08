@@ -1,4 +1,11 @@
 {
+  "Navbar": {
+    "Home": "Accueil",
+    "Blog": "Blog",
+    "Recipes": "Recettes",
+    "Ingredients": "Ingrédients",
+    "About": "A propos"
+  },
   "Lang": {
     "fr": "Français",
     "en": "Anglais",
@@ -15,11 +22,6 @@
     "twilight": "Twilight",
     "reddit": "Reddit",
     "system": "Système"
-  },
-  "Header": {
-    "About": "A propos",
-    "Blog": "Blog",
-    "Recipes": "Recettes"
   },
   "About": {
     "about": "A propos"

@@ -3,11 +3,9 @@ import {
   NextIntlClientProvider,
   useMessages,
 } from "next-intl";
-import { getMessages } from "next-intl/server";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import NextTopLoader from "nextjs-toploader";
-import { Header } from "@/components/Header";
 import NavBar from "@/components/Navbar";
 
 export default function LocaleLayout({
@@ -19,19 +17,7 @@ export default function LocaleLayout({
 }) {
   // Providing all messages to the client
   // side is the easiest way to get started
-  //const messages = await getMessages();
-
   const messages = useMessages();
-
-  // return (
-  //   <html lang={locale}>
-  //     <body>
-  //       <NextIntlClientProvider messages={messages}>
-  //         {children}
-  //       </NextIntlClientProvider>
-  //     </body>
-  //   </html>
-  // );
 
   return (
     <html

@@ -11,8 +11,9 @@ import ThemeSwitch from "./ThemeSwitch";
 import LangSwitcher from "./LangSwitch";
 import LogoIcon from "@/components/icons/logo";
 import MenuIcon from "@/components/icons/menu";
-import MountainIcon from "./icons/mountain";
 import { useEffect, useState } from "react";
+import { navlinks } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 interface NavBarProps {
   locale: string;
@@ -30,6 +31,8 @@ export default function NavBar({ locale }: NavBarProps) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const t = useTranslations("Navbar");
 
   return (
     <header
@@ -54,42 +57,19 @@ export default function NavBar({ locale }: NavBarProps) {
             </Link>
           </SheetClose>
           <div className="grid gap-4 py-6">
-            <SheetClose asChild>
-              <Link
-                href="#"
-                className="flex w-full items-center py-2 text-lg font-semibold"
-                prefetch={false}
-              >
-                Home
-              </Link>
-            </SheetClose>
-            <SheetClose asChild>
-              <Link
-                href="#"
-                className="flex w-full items-center py-2 text-lg font-semibold"
-                prefetch={false}
-              >
-                About
-              </Link>
-            </SheetClose>
-            <SheetClose asChild>
-              <Link
-                href="#"
-                className="flex w-full items-center py-2 text-lg font-semibold"
-                prefetch={false}
-              >
-                Services
-              </Link>
-            </SheetClose>
-            <SheetClose asChild>
-              <Link
-                href="#"
-                className="flex w-full items-center py-2 text-lg font-semibold"
-                prefetch={false}
-              >
-                Contact
-              </Link>
-            </SheetClose>
+            {navlinks.map((navlink) => {
+              return (
+                <SheetClose asChild>
+                  <Link
+                    href={navlink.path}
+                    className="text-lg font-medium hover:underline underline-offset-4"
+                    prefetch={false}
+                  >
+                    {t(navlink.label)}
+                  </Link>
+                </SheetClose>
+              );
+            })}
           </div>
         </SheetContent>
       </Sheet>
@@ -118,34 +98,17 @@ export default function NavBar({ locale }: NavBarProps) {
       {/* Nav links hidden for small and medium screens.*/}
       <div className="ml-auto hidden lg:flex">
         <nav className="flex items-center gap-6">
-          <Link
-            href="#"
-            className="text-lg font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Home
-          </Link>
-          <Link
-            href="#"
-            className="text-lg font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            About
-          </Link>
-          <Link
-            href="#"
-            className="text-lg font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Services
-          </Link>
-          <Link
-            href="#"
-            className="text-lg font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Contact
-          </Link>
+          {navlinks.map((navlink) => {
+            return (
+              <Link
+                href={navlink.path}
+                className="text-lg font-medium hover:underline underline-offset-4"
+                prefetch={false}
+              >
+                {t(navlink.label)}
+              </Link>
+            );
+          })}
         </nav>
       </div>
 

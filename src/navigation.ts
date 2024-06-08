@@ -4,12 +4,21 @@ import { createLocalizedPathnamesNavigation } from "next-intl/navigation";
 export const defaultLocale = "en" as const;
 export const locales = ["fr", "en", "de"] as const;
 
+export const navlinks: { path: string; label: string }[] = [
+  { path: "/", label: "Home" },
+  { path: "/blog", label: "Blog" },
+  { path: "/recipes", label: "Recipes" },
+  { path: "/ingredients", label: "Ingredients" },
+  { path: "/about", label: "About" },
+];
+
+//Internationalized pathnames (see commented example below)
 export const pathnames = {
   "/": "/",
-  "/about": "/about",
   "/blog": "/blog",
   "/recipes": "/recipes",
   "/ingredients": "/ingredients",
+  "/about": "/about",
 } satisfies Pathnames<typeof locales>;
 
 //   export const pathnames = {
