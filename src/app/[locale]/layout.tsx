@@ -6,7 +6,15 @@ import {
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import NextTopLoader from "nextjs-toploader";
-import NavBar from "@/components/Navbar";
+import { Header } from "@/components/Header";
+import { Inter as FontSans } from "next/font/google";
+import { cn } from "@/lib/utils";
+import { UserProvider } from "@/contexts/user-context";
+
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export default function LocaleLayout({
   children,
@@ -25,7 +33,14 @@ export default function LocaleLayout({
       dir={locale === "ar" || locale == "fa" ? "rtl" : "ltr"}
       suppressHydrationWarning
     >
-      <body>
+      <body
+        className={cn("font-sans antialiased", fontSans.variable)}
+
+        // className={cn(
+        //   "min-h-screen bg-background font-sans antialiased max-w-screen-xl",
+        //   fontSans.variable
+        // )}
+      >
         <ThemeProvider
           enableSystem
           //Switching theme will change the css 'class' attibute of the <html> element
@@ -57,9 +72,12 @@ export default function LocaleLayout({
               color="var(--primary)"
               showSpinner={false}
             />
-            <NavBar locale={locale} />
-            {/* <Header locale={locale} /> */}
-            <main className="mx-auto max-w-screen-2xl">{children}</main>
+            <UserProvider>
+              <div className="flex flex-col min-h-[100dvh]">
+                <Header locale={locale} />
+                <main className="flex-1">{children}</main>
+              </div>
+            </UserProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

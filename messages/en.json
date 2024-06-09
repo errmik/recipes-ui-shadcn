@@ -1,4 +1,7 @@
 {
+  "UserMenu": {
+    "Login": "Login"
+  },
   "Navbar": {
     "Home": "Home",
     "Blog": "Blog",

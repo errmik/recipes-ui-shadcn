@@ -37,4 +37,9 @@ export type AppPathnames = keyof typeof pathnames;
 
 //Overrides components and functions with a localized version
 export const { Link, redirect, usePathname, useRouter, getPathname } =
-  createLocalizedPathnamesNavigation({ locales, localePrefix, pathnames });
+  createLocalizedPathnamesNavigation({
+    locales,
+    localePrefix,
+    pathnames: pathnames as typeof pathnames & Record<string & {}, string>,
+  });
+//  createLocalizedPathnamesNavigation({ locales, localePrefix, pathnames });

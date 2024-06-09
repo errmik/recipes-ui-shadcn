@@ -3,7 +3,6 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
-import { FiSun } from "react-icons/fi";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -12,18 +11,20 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-export default function ThemeSwitch() {
+import { Sun } from "lucide-react";
+
+export default function ThemeSwitcher({ locale }: { locale: string }) {
   const t = useTranslations("Theme");
   const [mounted, setMounted] = useState(false);
   const { setTheme, resolvedTheme, themes, theme } = useTheme();
-  const ref = useRef(null);
+
   useEffect(() => setMounted(true), []);
   if (!mounted)
     return (
       <DropdownMenu open={false}>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="icon" className="w-[40px]">
-            <FiSun className="h-4 w-4" />
+          <Button variant="secondary" size="icon" className="rounded-full">
+            <Sun className="h-5 w-5" />
             <span className="sr-only">Toggle theme</span>
           </Button>
         </DropdownMenuTrigger>
@@ -31,36 +32,32 @@ export default function ThemeSwitch() {
     );
 
   return (
-    <div ref={ref} className="relative inline-block text-left">
-      {
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon" className="w-[40px]">
-              <FiSun className="h-4 w-4" />
-              <span className="sr-only">Toggle theme</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent asChild>
-            <div className="p-2 grid gap-2">
-              {themes.map((themeItem) => {
-                return (
-                  <DropdownMenuItem asChild>
-                    <Button
-                      key={themeItem}
-                      variant={theme === themeItem ? "default" : "outline"}
-                      onClick={() => {
-                        setTheme(themeItem);
-                      }}
-                    >
-                      {t(themeItem)}
-                    </Button>
-                  </DropdownMenuItem>
-                );
-              })}
-            </div>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      }
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="secondary" size="icon" className="rounded-full">
+          <Sun className="h-5 w-5" />
+          <span className="sr-only">Toggle theme</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent asChild>
+        <div className="p-2 grid gap-2">
+          {themes.map((themeItem) => {
+            return (
+              <DropdownMenuItem asChild key={"item-" + themeItem}>
+                <Button
+                  key={"button-" + themeItem}
+                  variant={theme === themeItem ? "default" : "outline"}
+                  onClick={() => {
+                    setTheme(themeItem);
+                  }}
+                >
+                  {t(themeItem)}
+                </Button>
+              </DropdownMenuItem>
+            );
+          })}
+        </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

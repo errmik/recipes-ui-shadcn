@@ -3,187 +3,237 @@ import { title } from "@/components/primitives";
 
 export default function RecipesPage() {
   return (
-    <div>
-      <h1 className={title()}>Recipes</h1>
-      {/* <ScrollToTop /> */}
-      <div className="anyipsum-output">
-        <p>
-          I'm baby wayfarers hot chicken hoodie keytar roof party listicle
-          sriracha. Bicycle rights etsy normcore, cardigan yr craft beer quinoa
-          tousled austin direct trade four loko green juice enamel pin raw
-          denim. Lyft waistcoat art party JOMO mumblecore, hell of aesthetic
-          grailed. Cupping cred messenger bag normcore, vegan freegan jawn
-          occupy blog sriracha air plant.
-        </p>
-        <p>
-          Austin next level everyday carry you probably haven't heard of them,
-          la croix copper mug quinoa tacos. Church-key activated charcoal
-          bushwick vibecession, pork belly kale chips pop-up tacos listicle
-          celiac 90's shaman leggings grailed. Hot chicken yes plz before they
-          sold out disrupt bodega boys lo-fi. Vegan normcore meggings, waistcoat
-          poke church-key umami yes plz. Beard big mood tumeric XOXO, praxis
-          austin ramps fixie cornhole craft beer chartreuse truffaut vaporware.
-        </p>
-        <p>
-          Sriracha grailed iPhone, dreamcatcher lumbersexual etsy affogato. Banh
-          mi heirloom post-ironic coloring book small batch. 3 wolf moon roof
-          party tonx ugh knausgaard, migas cray air plant. Narwhal bodega boys
-          banh mi vice mumblecore, master cleanse trust fund grailed shabby chic
-          cold-pressed.
-        </p>
-        <p>
-          Mixtape chicharrones keffiyeh, jawn skateboard neutra waistcoat
-          hexagon. Tilde mustache kickstarter fixie activated charcoal, migas
-          hexagon raw denim four loko yuccie plaid helvetica 8-bit cardigan.
-          Brooklyn microdosing yr sus scenester synth tumeric poutine fanny pack
-          tattooed godard vaporware. Jawn letterpress meh, meditation
-          cold-pressed scenester PBR&amp;B chambray selvage kale chips unicorn
-          chicharrones bushwick. Synth vibecession cold-pressed asymmetrical.
-        </p>
-        <p>
-          Bitters paleo portland, quinoa keytar bespoke leggings fam. Fanny pack
-          messenger bag shoreditch banh mi fam solarpunk vape big mood etsy
-          subway tile kogi. Selvage vinyl trust fund glossier letterpress,
-          biodiesel master cleanse tacos squid sriracha pinterest hella copper
-          mug. Kale chips wayfarers knausgaard, af heirloom tumblr pork belly
-          direct trade fixie 3 wolf moon hammock blackbird spyplane literally
-          helvetica chia. Semiotics venmo pinterest jianbing +1, tacos keytar.
-          Flannel vice narwhal organic blackbird spyplane flexitarian poke
-          bodega boys godard banh mi gatekeep hammock mukbang stumptown.
-        </p>
-        <p>
-          I'm baby wayfarers hot chicken hoodie keytar roof party listicle
-          sriracha. Bicycle rights etsy normcore, cardigan yr craft beer quinoa
-          tousled austin direct trade four loko green juice enamel pin raw
-          denim. Lyft waistcoat art party JOMO mumblecore, hell of aesthetic
-          grailed. Cupping cred messenger bag normcore, vegan freegan jawn
-          occupy blog sriracha air plant.
-        </p>
-        <p>
-          Austin next level everyday carry you probably haven't heard of them,
-          la croix copper mug quinoa tacos. Church-key activated charcoal
-          bushwick vibecession, pork belly kale chips pop-up tacos listicle
-          celiac 90's shaman leggings grailed. Hot chicken yes plz before they
-          sold out disrupt bodega boys lo-fi. Vegan normcore meggings, waistcoat
-          poke church-key umami yes plz. Beard big mood tumeric XOXO, praxis
-          austin ramps fixie cornhole craft beer chartreuse truffaut vaporware.
-        </p>
-        <p>
-          Sriracha grailed iPhone, dreamcatcher lumbersexual etsy affogato. Banh
-          mi heirloom post-ironic coloring book small batch. 3 wolf moon roof
-          party tonx ugh knausgaard, migas cray air plant. Narwhal bodega boys
-          banh mi vice mumblecore, master cleanse trust fund grailed shabby chic
-          cold-pressed.
-        </p>
-        <p>
-          Mixtape chicharrones keffiyeh, jawn skateboard neutra waistcoat
-          hexagon. Tilde mustache kickstarter fixie activated charcoal, migas
-          hexagon raw denim four loko yuccie plaid helvetica 8-bit cardigan.
-          Brooklyn microdosing yr sus scenester synth tumeric poutine fanny pack
-          tattooed godard vaporware. Jawn letterpress meh, meditation
-          cold-pressed scenester PBR&amp;B chambray selvage kale chips unicorn
-          chicharrones bushwick. Synth vibecession cold-pressed asymmetrical.
-        </p>
-        <p>
-          Bitters paleo portland, quinoa keytar bespoke leggings fam. Fanny pack
-          messenger bag shoreditch banh mi fam solarpunk vape big mood etsy
-          subway tile kogi. Selvage vinyl trust fund glossier letterpress,
-          biodiesel master cleanse tacos squid sriracha pinterest hella copper
-          mug. Kale chips wayfarers knausgaard, af heirloom tumblr pork belly
-          direct trade fixie 3 wolf moon hammock blackbird spyplane literally
-          helvetica chia. Semiotics venmo pinterest jianbing +1, tacos keytar.
-          Flannel vice narwhal organic blackbird spyplane flexitarian poke
-          bodega boys godard banh mi gatekeep hammock mukbang stumptown.
-        </p>
-        <p>
-          I'm baby wayfarers hot chicken hoodie keytar roof party listicle
-          sriracha. Bicycle rights etsy normcore, cardigan yr craft beer quinoa
-          tousled austin direct trade four loko green juice enamel pin raw
-          denim. Lyft waistcoat art party JOMO mumblecore, hell of aesthetic
-          grailed. Cupping cred messenger bag normcore, vegan freegan jawn
-          occupy blog sriracha air plant.
-        </p>
-        <p>
-          Austin next level everyday carry you probably haven't heard of them,
-          la croix copper mug quinoa tacos. Church-key activated charcoal
-          bushwick vibecession, pork belly kale chips pop-up tacos listicle
-          celiac 90's shaman leggings grailed. Hot chicken yes plz before they
-          sold out disrupt bodega boys lo-fi. Vegan normcore meggings, waistcoat
-          poke church-key umami yes plz. Beard big mood tumeric XOXO, praxis
-          austin ramps fixie cornhole craft beer chartreuse truffaut vaporware.
-        </p>
-        <p>
-          Sriracha grailed iPhone, dreamcatcher lumbersexual etsy affogato. Banh
-          mi heirloom post-ironic coloring book small batch. 3 wolf moon roof
-          party tonx ugh knausgaard, migas cray air plant. Narwhal bodega boys
-          banh mi vice mumblecore, master cleanse trust fund grailed shabby chic
-          cold-pressed.
-        </p>
-        <p>
-          Mixtape chicharrones keffiyeh, jawn skateboard neutra waistcoat
-          hexagon. Tilde mustache kickstarter fixie activated charcoal, migas
-          hexagon raw denim four loko yuccie plaid helvetica 8-bit cardigan.
-          Brooklyn microdosing yr sus scenester synth tumeric poutine fanny pack
-          tattooed godard vaporware. Jawn letterpress meh, meditation
-          cold-pressed scenester PBR&amp;B chambray selvage kale chips unicorn
-          chicharrones bushwick. Synth vibecession cold-pressed asymmetrical.
-        </p>
-        <p>
-          Bitters paleo portland, quinoa keytar bespoke leggings fam. Fanny pack
-          messenger bag shoreditch banh mi fam solarpunk vape big mood etsy
-          subway tile kogi. Selvage vinyl trust fund glossier letterpress,
-          biodiesel master cleanse tacos squid sriracha pinterest hella copper
-          mug. Kale chips wayfarers knausgaard, af heirloom tumblr pork belly
-          direct trade fixie 3 wolf moon hammock blackbird spyplane literally
-          helvetica chia. Semiotics venmo pinterest jianbing +1, tacos keytar.
-          Flannel vice narwhal organic blackbird spyplane flexitarian poke
-          bodega boys godard banh mi gatekeep hammock mukbang stumptown.
-        </p>
-        <p>
-          I'm baby wayfarers hot chicken hoodie keytar roof party listicle
-          sriracha. Bicycle rights etsy normcore, cardigan yr craft beer quinoa
-          tousled austin direct trade four loko green juice enamel pin raw
-          denim. Lyft waistcoat art party JOMO mumblecore, hell of aesthetic
-          grailed. Cupping cred messenger bag normcore, vegan freegan jawn
-          occupy blog sriracha air plant.
-        </p>
-        <p>
-          Austin next level everyday carry you probably haven't heard of them,
-          la croix copper mug quinoa tacos. Church-key activated charcoal
-          bushwick vibecession, pork belly kale chips pop-up tacos listicle
-          celiac 90's shaman leggings grailed. Hot chicken yes plz before they
-          sold out disrupt bodega boys lo-fi. Vegan normcore meggings, waistcoat
-          poke church-key umami yes plz. Beard big mood tumeric XOXO, praxis
-          austin ramps fixie cornhole craft beer chartreuse truffaut vaporware.
-        </p>
-        <p>
-          Sriracha grailed iPhone, dreamcatcher lumbersexual etsy affogato. Banh
-          mi heirloom post-ironic coloring book small batch. 3 wolf moon roof
-          party tonx ugh knausgaard, migas cray air plant. Narwhal bodega boys
-          banh mi vice mumblecore, master cleanse trust fund grailed shabby chic
-          cold-pressed.
-        </p>
-        <p>
-          Mixtape chicharrones keffiyeh, jawn skateboard neutra waistcoat
-          hexagon. Tilde mustache kickstarter fixie activated charcoal, migas
-          hexagon raw denim four loko yuccie plaid helvetica 8-bit cardigan.
-          Brooklyn microdosing yr sus scenester synth tumeric poutine fanny pack
-          tattooed godard vaporware. Jawn letterpress meh, meditation
-          cold-pressed scenester PBR&amp;B chambray selvage kale chips unicorn
-          chicharrones bushwick. Synth vibecession cold-pressed asymmetrical.
-        </p>
-        <p>
-          Bitters paleo portland, quinoa keytar bespoke leggings fam. Fanny pack
-          messenger bag shoreditch banh mi fam solarpunk vape big mood etsy
-          subway tile kogi. Selvage vinyl trust fund glossier letterpress,
-          biodiesel master cleanse tacos squid sriracha pinterest hella copper
-          mug. Kale chips wayfarers knausgaard, af heirloom tumblr pork belly
-          direct trade fixie 3 wolf moon hammock blackbird spyplane literally
-          helvetica chia. Semiotics venmo pinterest jianbing +1, tacos keytar.
-          Flannel vice narwhal organic blackbird spyplane flexitarian poke
-          bodega boys godard banh mi gatekeep hammock mukbang stumptown.
-        </p>
+    <section className="w-full py-6 md:py-12 lg:py-16">
+      <div className="container grid gap-12 px-4 md:px-6">
+        <div className="flex flex-col items-center justify-center space-y-4 text-center">
+          <div className="space-y-2">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+              Recipes
+            </h2>
+            <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+              Explore a curated selection of my most famous recipes.
+            </p>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="group relative rounded-2xl overflow-hidden">
+            <img
+              src="https://placeholder.pics/svg/400x300"
+              width="400"
+              height="300"
+              alt="Project 1"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gray-900/80 flex flex-col justify-end p-6 space-y-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <h3 className="text-2xl font-bold text-white">
+                Futuristic UI Design
+              </h3>
+              <p className="text-gray-300">
+                An innovative and visually striking UI design for a cutting-edge
+                technology platform.
+              </p>
+            </div>
+          </div>
+          <div className="group relative rounded-2xl overflow-hidden">
+            <img
+              src="https://placeholder.pics/svg/400x300"
+              width="400"
+              height="300"
+              alt="Project 2"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gray-900/80 flex flex-col justify-end p-6 space-y-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <h3 className="text-2xl font-bold text-white">
+                Minimalist Branding
+              </h3>
+              <p className="text-gray-300">
+                A clean and modern branding design for a sustainable lifestyle
+                brand.
+              </p>
+            </div>
+          </div>
+          <div className="group relative rounded-2xl overflow-hidden">
+            <img
+              src="https://placeholder.pics/svg/400x300"
+              width="400"
+              height="300"
+              alt="Project 3"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gray-900/80 flex flex-col justify-end p-6 space-y-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <h3 className="text-2xl font-bold text-white">
+                Interactive Web Experience
+              </h3>
+              <p className="text-gray-300">
+                An engaging and immersive web experience that blends
+                cutting-edge technology and creative design.
+              </p>
+            </div>
+          </div>
+          <div className="group relative rounded-2xl overflow-hidden">
+            <img
+              src="https://placeholder.pics/svg/400x300"
+              width="400"
+              height="300"
+              alt="Project 4"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gray-900/80 flex flex-col justify-end p-6 space-y-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <h3 className="text-2xl font-bold text-white">
+                Responsive Mobile App
+              </h3>
+              <p className="text-gray-300">
+                A beautifully designed and highly intuitive mobile application
+                that delivers a seamless user experience.
+              </p>
+            </div>
+          </div>
+          <div className="group relative rounded-2xl overflow-hidden">
+            <img
+              src="https://placeholder.pics/svg/400x300"
+              width="400"
+              height="300"
+              alt="Project 5"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gray-900/80 flex flex-col justify-end p-6 space-y-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <h3 className="text-2xl font-bold text-white">
+                Innovative Data Visualization
+              </h3>
+              <p className="text-gray-300">
+                A visually stunning and highly informative data visualization
+                project that brings complex information to life.
+              </p>
+            </div>
+          </div>
+          <div className="group relative rounded-2xl overflow-hidden">
+            <img
+              src="https://placeholder.pics/svg/400x300"
+              width="400"
+              height="300"
+              alt="Project 6"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gray-900/80 flex flex-col justify-end p-6 space-y-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <h3 className="text-2xl font-bold text-white">
+                Immersive AR Experience
+              </h3>
+              <p className="text-gray-300">
+                A groundbreaking augmented reality experience that transports
+                users to a captivating virtual world.
+              </p>
+            </div>
+          </div>
+          <div className="group relative rounded-2xl overflow-hidden">
+            <img
+              src="https://placeholder.pics/svg/400x300"
+              width="400"
+              height="300"
+              alt="Project 1"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gray-900/80 flex flex-col justify-end p-6 space-y-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <h3 className="text-2xl font-bold text-white">
+                Futuristic UI Design
+              </h3>
+              <p className="text-gray-300">
+                An innovative and visually striking UI design for a cutting-edge
+                technology platform.
+              </p>
+            </div>
+          </div>
+          <div className="group relative rounded-2xl overflow-hidden">
+            <img
+              src="https://placeholder.pics/svg/400x300"
+              width="400"
+              height="300"
+              alt="Project 2"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gray-900/80 flex flex-col justify-end p-6 space-y-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <h3 className="text-2xl font-bold text-white">
+                Minimalist Branding
+              </h3>
+              <p className="text-gray-300">
+                A clean and modern branding design for a sustainable lifestyle
+                brand.
+              </p>
+            </div>
+          </div>
+          <div className="group relative rounded-2xl overflow-hidden">
+            <img
+              src="https://placeholder.pics/svg/400x300"
+              width="400"
+              height="300"
+              alt="Project 3"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gray-900/80 flex flex-col justify-end p-6 space-y-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <h3 className="text-2xl font-bold text-white">
+                Interactive Web Experience
+              </h3>
+              <p className="text-gray-300">
+                An engaging and immersive web experience that blends
+                cutting-edge technology and creative design.
+              </p>
+            </div>
+          </div>
+          <div className="group relative rounded-2xl overflow-hidden">
+            <img
+              src="https://placeholder.pics/svg/400x300"
+              width="400"
+              height="300"
+              alt="Project 4"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gray-900/80 flex flex-col justify-end p-6 space-y-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <h3 className="text-2xl font-bold text-white">
+                Responsive Mobile App
+              </h3>
+              <p className="text-gray-300">
+                A beautifully designed and highly intuitive mobile application
+                that delivers a seamless user experience.
+              </p>
+            </div>
+          </div>
+          <div className="group relative rounded-2xl overflow-hidden">
+            <img
+              src="https://placeholder.pics/svg/400x300"
+              width="400"
+              height="300"
+              alt="Project 5"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gray-900/80 flex flex-col justify-end p-6 space-y-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <h3 className="text-2xl font-bold text-white">
+                Innovative Data Visualization
+              </h3>
+              <p className="text-gray-300">
+                A visually stunning and highly informative data visualization
+                project that brings complex information to life.
+              </p>
+            </div>
+          </div>
+          <div className="group relative rounded-2xl overflow-hidden">
+            <img
+              src="https://placeholder.pics/svg/400x300"
+              width="400"
+              height="300"
+              alt="Project 6"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gray-900/80 flex flex-col justify-end p-6 space-y-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <h3 className="text-2xl font-bold text-white">
+                Immersive AR Experience
+              </h3>
+              <p className="text-gray-300">
+                A groundbreaking augmented reality experience that transports
+                users to a captivating virtual world.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

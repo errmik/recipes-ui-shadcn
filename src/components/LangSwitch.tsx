@@ -12,6 +12,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "./ui/dropdown-menu";
+import { Globe } from "lucide-react";
 
 interface Props {
   locale: string;
@@ -45,49 +46,46 @@ const LangSwitcher: React.FC<Props> = ({ locale }) => {
     return (
       <DropdownMenu open={false}>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="icon" className="w-[40px]">
-            <FiGlobe className="h-4 w-4" />
-            <span className="sr-only">Change language</span>
+          <Button variant="secondary" size="icon" className="rounded-full">
+            <Globe className="h-5 w-5" />
+            <span className="sr-only">Toggle theme</span>
           </Button>
         </DropdownMenuTrigger>
       </DropdownMenu>
     );
 
   return (
-    <div ref={ref} className="relative inline-block text-left">
-      {
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon" className="w-[40px]">
-              <FiGlobe className="h-4 w-4" />
-              <span className="sr-only">Change language</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent asChild>
-            <div className="p-2 grid gap-2">
-              {options.map((lang) => {
-                return (
-                  <DropdownMenuItem asChild>
-                    <Button
-                      key={lang.code}
-                      lang={lang.code}
-                      variant={locale === lang.code ? "default" : "outline"}
-                    >
-                      <Link
-                        key={lang.code}
-                        href={`/${lang.code}/${urlSegments.join("/")}`}
-                      >
-                        {capitalize(lang.country)}
-                      </Link>
-                    </Button>
-                  </DropdownMenuItem>
-                );
-              })}
-            </div>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      }
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="secondary" size="icon" className="rounded-full">
+          <Globe className="h-5 w-5" />
+          <span className="sr-only">Toggle theme</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent asChild>
+        <div className="p-2 grid gap-2">
+          {options.map((lang) => {
+            console.log(lang);
+            return (
+              <DropdownMenuItem asChild key={"item-" + lang.code}>
+                <Button
+                  key={"button-" + lang.code}
+                  lang={lang.code}
+                  variant={locale === lang.code ? "default" : "outline"}
+                >
+                  <Link
+                    key={"link-" + lang.code}
+                    href={`/${lang.code}/${urlSegments.join("/")}`}
+                  >
+                    {capitalize(lang.country)}
+                  </Link>
+                </Button>
+              </DropdownMenuItem>
+            );
+          })}
+        </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 

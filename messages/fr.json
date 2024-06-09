@@ -1,4 +1,7 @@
 {
+  "UserMenu": {
+    "Login": "Connexion"
+  },
   "Navbar": {
     "Home": "Accueil",
     "Blog": "Blog",
