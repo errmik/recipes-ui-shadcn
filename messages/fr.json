@@ -1,6 +1,13 @@
 {
   "UserMenu": {
-    "Login": "Connexion"
+    "Login": "Connexion",
+    "Logout": "Deconnexion"
+  },
+  "Login": {
+    "Login": "Connexion",
+    "Signup": "Inscription",
+    "CreateAccount": "Créer un compte",
+    "Email": "Email"
   },
   "Navbar": {
     "Home": "Accueil",

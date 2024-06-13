@@ -10,41 +10,40 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useTranslations } from "next-intl";
+import { LoginForm } from "./login-form";
 
 export function Login() {
+  const t = useTranslations("Login");
+
   return (
-    <Tabs defaultValue="account" className="w-[400px]">
+    <Tabs defaultValue="login" className="max-w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="account">Account</TabsTrigger>
-        <TabsTrigger value="password">Password</TabsTrigger>
+        <TabsTrigger value="login">{t("Login")}</TabsTrigger>
+        <TabsTrigger value="signup">{t("Signup")}</TabsTrigger>
       </TabsList>
-      <TabsContent value="account">
+      <TabsContent value="login">
         <Card>
           <CardHeader>
-            <CardTitle>Account</CardTitle>
+            <CardTitle>{t("Login")}</CardTitle>
             <CardDescription>
               Make changes to your account here. Click save when you're done.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Pedro Duarte" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
-            </div>
+            <LoginForm />
           </CardContent>
-          <CardFooter>
-            <Button>Save changes</Button>
-          </CardFooter>
+          {/* <CardFooter>
+              <Button type="submit" className="w-full">
+                {t("Login")}
+              </Button>
+            </CardFooter> */}
         </Card>
       </TabsContent>
-      <TabsContent value="password">
+      <TabsContent value="signup">
         <Card>
           <CardHeader>
-            <CardTitle>Password</CardTitle>
+            <CardTitle>{t("Signup")}</CardTitle>
             <CardDescription>
               Change your password here. After saving, you'll be logged out.
             </CardDescription>
@@ -60,7 +59,7 @@ export function Login() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Save password</Button>
+            <Button className="w-full">Save password</Button>
           </CardFooter>
         </Card>
       </TabsContent>

@@ -6,18 +6,26 @@ import { StatusCodes } from "http-status-codes";
 import { redirect } from "next/navigation";
 import errorCodes from "@/constants/errorCodes.js";
 import { cookies } from "next/headers";
+import { LoginSchema } from "@/lib/form-schema";
 
 export const handleLogin = async (previousState: any, formData: FormData) => {
   const email = formData.get("email");
 
-  if (!email)
+  let zodFormData = Object.fromEntries(formData);
+  console.log(zodFormData);
+
+  const validation = LoginSchema.safeParse(zodFormData);
+
+  if (!validation.success) {
     return {
       success: false,
       msg: "Email invalid",
       code: errorCodes.INVALID_EMAIL,
       name: null,
       email: null,
+      errors: validation.error.issues,
     };
+  }
 
   const requestOptions = {
     method: "POST",
@@ -31,11 +39,7 @@ export const handleLogin = async (previousState: any, formData: FormData) => {
       requestOptions
     );
 
-    console.log(response);
-
     const data = await response.json();
-
-    console.log(data);
 
     if (response.status === StatusCodes.OK) {
       console.log("SUCCESSS");
@@ -48,8 +52,6 @@ export const handleLogin = async (previousState: any, formData: FormData) => {
         email: data.email,
       };
     } else {
-      console.log("SOMETHING WENT WRONG");
-
       return {
         success: false,
         msg: data.msg,

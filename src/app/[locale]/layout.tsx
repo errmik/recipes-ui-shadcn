@@ -34,7 +34,7 @@ export default function LocaleLayout({
       suppressHydrationWarning
     >
       <body
-        className={cn("font-sans antialiased", fontSans.variable)}
+        className={cn("min-h-screen font-sans antialiased", fontSans.variable)}
 
         // className={cn(
         //   "min-h-screen bg-background font-sans antialiased max-w-screen-xl",
@@ -73,10 +73,8 @@ export default function LocaleLayout({
               showSpinner={false}
             />
             <UserProvider>
-              <div className="flex flex-col min-h-[100dvh]">
-                <Header locale={locale} />
-                <main className="flex-1">{children}</main>
-              </div>
+              <Header locale={locale} />
+              <main className="max-w-7xl mx-auto">{children}</main>
             </UserProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
