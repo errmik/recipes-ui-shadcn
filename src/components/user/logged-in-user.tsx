@@ -12,7 +12,7 @@ import { Button } from "../ui/button";
 import { CircleUser } from "lucide-react";
 import { useTranslations } from "next-intl";
 // import { Link } from "@/navigation";
-import NavigationLink from "../NavigationLink";
+import NavigationLink from "../navigation-link";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useUser } from "@/contexts/user-context";

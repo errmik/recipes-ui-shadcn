@@ -4,9 +4,9 @@ import {
   useMessages,
 } from "next-intl";
 import "@/styles/globals.css";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeProvider } from "@/components/theme-provider";
 import NextTopLoader from "nextjs-toploader";
-import { Header } from "@/components/Header";
+import { Header } from "@/components/header";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { UserProvider } from "@/contexts/user-context";
@@ -34,12 +34,10 @@ export default function LocaleLayout({
       suppressHydrationWarning
     >
       <body
-        className={cn("min-h-screen font-sans antialiased", fontSans.variable)}
-
-        // className={cn(
-        //   "min-h-screen bg-background font-sans antialiased max-w-screen-xl",
-        //   fontSans.variable
-        // )}
+        className={cn(
+          "bg-bezel min-h-screen font-sans antialiased",
+          fontSans.variable
+        )}
       >
         <ThemeProvider
           enableSystem
@@ -73,8 +71,10 @@ export default function LocaleLayout({
               showSpinner={false}
             />
             <UserProvider>
-              <Header locale={locale} />
-              <main className="max-w-7xl mx-auto">{children}</main>
+              <main className="bg-background min-h-screen max-w-7xl mx-auto">
+                <Header locale={locale} />
+                {children}
+              </main>
             </UserProvider>
           </NextIntlClientProvider>
         </ThemeProvider>

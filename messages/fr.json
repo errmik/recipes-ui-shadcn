@@ -14,15 +14,18 @@
     "Blog": "Blog",
     "Recipes": "Recettes",
     "Ingredients": "Ingrédients",
-    "About": "A propos"
+    "About": "A propos",
+    "ToggleMenu": "Ouvrir le menu de navigation"
   },
   "Lang": {
     "fr": "Français",
     "en": "Anglais",
-    "de": "Allemand"
+    "de": "Allemand",
+    "ToggleLang": "Ouvrir le menu des langues"
   },
   "Theme": {
     "Theme": "Thème",
+    "ToggleTheme": "Ouvrir le menu des thèmes",
     "light": "Clair",
     "dark": "Sombre",
     "instagram": "Instagram",

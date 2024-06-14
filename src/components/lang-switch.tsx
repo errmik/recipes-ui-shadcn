@@ -3,7 +3,6 @@ import { capitalize } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname, useSelectedLayoutSegments } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-import { FiGlobe, FiSun } from "react-icons/fi";
 import { useTranslations } from "next-intl";
 import { Button } from "./ui/button";
 import {
@@ -48,7 +47,7 @@ const LangSwitcher: React.FC<Props> = ({ locale }) => {
         <DropdownMenuTrigger asChild>
           <Button variant="secondary" size="icon" className="rounded-full">
             <Globe className="h-5 w-5" />
-            <span className="sr-only">Toggle theme</span>
+            <span className="sr-only">{t("ToggleLang")}</span>
           </Button>
         </DropdownMenuTrigger>
       </DropdownMenu>
@@ -59,13 +58,12 @@ const LangSwitcher: React.FC<Props> = ({ locale }) => {
       <DropdownMenuTrigger asChild>
         <Button variant="secondary" size="icon" className="rounded-full">
           <Globe className="h-5 w-5" />
-          <span className="sr-only">Toggle theme</span>
+          <span className="sr-only">{t("ToggleLang")}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent asChild>
         <div className="p-2 grid gap-2">
           {options.map((lang) => {
-            console.log(lang);
             return (
               <DropdownMenuItem asChild key={"item-" + lang.code}>
                 <Button

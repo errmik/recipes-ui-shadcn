@@ -76,7 +76,10 @@ export const OtpForm = ({ email }: { email: string }) => {
 
     // console.log(res);
 
-    if (res && !res.success) setErrors(res);
+    if (res && !res.success) {
+      setErrors(res);
+      return;
+    }
 
     if (res?.user) setUser(res.user);
     // else router.push("/otp");

@@ -2,7 +2,7 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -19,13 +19,15 @@ export default function ThemeSwitcher({ locale }: { locale: string }) {
   const { setTheme, resolvedTheme, themes, theme } = useTheme();
 
   useEffect(() => setMounted(true), []);
+
+  //empty list as long as the component is not fully mounted
   if (!mounted)
     return (
       <DropdownMenu open={false}>
         <DropdownMenuTrigger asChild>
           <Button variant="secondary" size="icon" className="rounded-full">
             <Sun className="h-5 w-5" />
-            <span className="sr-only">Toggle theme</span>
+            <span className="sr-only">{t("ToggleTheme")}</span>
           </Button>
         </DropdownMenuTrigger>
       </DropdownMenu>
@@ -36,7 +38,7 @@ export default function ThemeSwitcher({ locale }: { locale: string }) {
       <DropdownMenuTrigger asChild>
         <Button variant="secondary" size="icon" className="rounded-full">
           <Sun className="h-5 w-5" />
-          <span className="sr-only">Toggle theme</span>
+          <span className="sr-only">{t("ToggleTheme")}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent asChild>

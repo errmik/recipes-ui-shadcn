@@ -4,6 +4,8 @@ import { createLocalizedPathnamesNavigation } from "next-intl/navigation";
 export const defaultLocale = "en" as const;
 export const locales = ["fr", "en", "de"] as const;
 
+//Navigation menu items
+//Label is used as a next-intl key
 export const navlinks: { path: string; label: string }[] = [
   { path: "/", label: "Home" },
   { path: "/blog", label: "Blog" },
