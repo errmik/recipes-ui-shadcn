@@ -1,7 +1,9 @@
 {
   "UserMenu": {
     "Login": "Connexion",
-    "Logout": "Deconnexion"
+    "Logout": "Deconnexion",
+    "NotSignedIn": "Non connecté",
+    "Settings": "Paramètres"
   },
   "Login": {
     "Login": "Connexion",
@@ -18,6 +20,7 @@
     "ToggleMenu": "Ouvrir le menu de navigation"
   },
   "Lang": {
+    "Lang": "Langue",
     "fr": "Français",
     "en": "Anglais",
     "de": "Allemand",

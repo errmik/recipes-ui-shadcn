@@ -40,7 +40,7 @@ export default function LocaleLayout({
         )}
       >
         <ThemeProvider
-          enableSystem
+          // enableSystem
           //Switching theme will change the css 'class' attibute of the <html> element
           attribute="class"
           defaultTheme="light"

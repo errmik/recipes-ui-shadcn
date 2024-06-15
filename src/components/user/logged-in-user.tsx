@@ -8,11 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
-import { CircleUser } from "lucide-react";
 import { useTranslations } from "next-intl";
-// import { Link } from "@/navigation";
-import NavigationLink from "../navigation-link";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useUser } from "@/contexts/user-context";
@@ -69,33 +65,22 @@ export default function LoggedInUser({
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {/* <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator /> */}
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Button
-            onClick={async () => {
-              setUser(null);
-              await logOut();
-            }}
-          >
-            {t("Logout")}
-          </Button>
-          {/* <Link
-            key="logout"
-            href={`/${locale}/logout`}
-            className="flex items-center gap-2 text-lg font-semibold md:text-base whitespace-nowrap"
-            prefetch={false}
-            onClick={async () => {
-              setUser(null);
-              await logOut();
-            }}
-          >
-            {t("Logout")}
-          </Link> */}
+          <Link key="settings" href={`/${locale}/settings/bio`}>
+            {t("Settings")}
+          </Link>
         </DropdownMenuItem>
-        {/* <DropdownMenuItem>Support</DropdownMenuItem> */}
-        {/* <DropdownMenuSeparator />
-        <DropdownMenuItem>Logout</DropdownMenuItem> */}
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          onClick={async () => {
+            setUser(null);
+            await logOut();
+          }}
+        >
+          {t("Logout")}
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

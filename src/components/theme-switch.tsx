@@ -8,6 +8,8 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
@@ -41,24 +43,23 @@ export default function ThemeSwitcher({ locale }: { locale: string }) {
           <span className="sr-only">{t("ToggleTheme")}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent asChild>
-        <div className="p-2 grid gap-2">
-          {themes.map((themeItem) => {
-            return (
-              <DropdownMenuItem asChild key={"item-" + themeItem}>
-                <Button
-                  key={"button-" + themeItem}
-                  variant={theme === themeItem ? "default" : "outline"}
-                  onClick={() => {
-                    setTheme(themeItem);
-                  }}
-                >
-                  {t(themeItem)}
-                </Button>
-              </DropdownMenuItem>
-            );
-          })}
-        </div>
+      <DropdownMenuContent align="end">
+        <DropdownMenuLabel>{t("Theme")}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {themes.map((themeItem) => {
+          return (
+            <DropdownMenuItem
+              key={"themeitem-" + themeItem}
+              onClick={async () => {
+                setTheme(themeItem);
+              }}
+              disabled={theme === themeItem}
+              lang={locale}
+            >
+              {t(themeItem)}
+            </DropdownMenuItem>
+          );
+        })}
       </DropdownMenuContent>
     </DropdownMenu>
   );
