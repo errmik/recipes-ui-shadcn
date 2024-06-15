@@ -60,6 +60,7 @@ export default function LoggedInUser({
                 : user.avatar
             }
             alt="user"
+            className="hover:scale-110"
           />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>

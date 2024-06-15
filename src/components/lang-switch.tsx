@@ -47,21 +47,19 @@ const LangSwitcher: React.FC<Props> = ({ locale }) => {
     return (
       <DropdownMenu open={false}>
         <DropdownMenuTrigger asChild>
-          <Button variant="secondary" size="icon" className="rounded-full">
-            <Globe className="h-5 w-5" />
+          <Globe className="h-5 w-5">
             <span className="sr-only">{t("ToggleLang")}</span>
-          </Button>
+          </Globe>
         </DropdownMenuTrigger>
       </DropdownMenu>
     );
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="secondary" size="icon" className="rounded-full">
-          <Globe className="h-5 w-5" />
+      <DropdownMenuTrigger asChild className="hover:scale-110">
+        <Globe className="h-5 w-5">
           <span className="sr-only">{t("ToggleLang")}</span>
-        </Button>
+        </Globe>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>{t("Lang")}</DropdownMenuLabel>

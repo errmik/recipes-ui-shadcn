@@ -27,21 +27,19 @@ export default function ThemeSwitcher({ locale }: { locale: string }) {
     return (
       <DropdownMenu open={false}>
         <DropdownMenuTrigger asChild>
-          <Button variant="secondary" size="icon" className="rounded-full">
-            <Sun className="h-5 w-5" />
+          <Sun className="h-5 w-5">
             <span className="sr-only">{t("ToggleTheme")}</span>
-          </Button>
+          </Sun>
         </DropdownMenuTrigger>
       </DropdownMenu>
     );
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="secondary" size="icon" className="rounded-full">
-          <Sun className="h-5 w-5" />
+      <DropdownMenuTrigger asChild className="hover:scale-110">
+        <Sun className="h-5 w-5">
           <span className="sr-only">{t("ToggleTheme")}</span>
-        </Button>
+        </Sun>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>{t("Theme")}</DropdownMenuLabel>

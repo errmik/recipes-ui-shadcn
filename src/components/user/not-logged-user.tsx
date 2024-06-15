@@ -17,10 +17,12 @@ export default function NotLoggedUser({ locale }: { locale: string }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="secondary" size="icon" className="rounded-full">
-          <CircleUser className="h-5 w-5" />
+        {/* <Button variant="secondary" size="icon" className="rounded-full"> */}
+        <CircleUser className="h-5 w-5 hover:scale-110">
           <span className="sr-only">{t("ToggleUser")}</span>
-        </Button>
+        </CircleUser>
+
+        {/* </Button> */}
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end">
