@@ -13,28 +13,33 @@ import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useUser } from "@/contexts/user-context";
 import { getUser, logOut } from "@/actions/auth";
+import { useRouter } from "next/router";
 
 export default function LoggedInUser({
   locale,
-}: //   user,
-{
+  userFromContext,
+}: {
   locale: string;
-  //   user: any;
+  userFromContext: any;
 }) {
+  //Still not sure if it's safe to only use the user from the context
+  //Checking the user on each page with an effect may lead to more http queries (light ones, the server will only read cookies),
+  //but the state of the navbar will be more up-to-date
+  //Let's keep the user in the props until a clear decision
+
   const getMe = async () => {
     //const router = useRouter();
-    console.log("fetching user");
+
     //Fetch the user
     var userFromSession = await getUser();
 
-    console.log("userFromSession :" + userFromSession);
-
     if (userFromSession) {
-      console.log("userFromSession is null, fetching");
+      console.log("userFromSession is not null : ", userFromSession);
       setUser(userFromSession);
+    } else {
+      console.log("userFromSession is null");
+      //router.push("/");
     }
-
-    console.log(user);
   };
 
   const { user, setUser } = useUser();
@@ -42,7 +47,12 @@ export default function LoggedInUser({
   const t = useTranslations("UserMenu");
 
   useEffect(() => {
-    if (!user) getMe();
+    if (!user) {
+      console.log("user is null, fetching");
+      getMe();
+    } else {
+      console.log("user is not null");
+    }
   });
 
   console.log(user);

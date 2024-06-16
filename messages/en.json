@@ -9,7 +9,19 @@
     "Login": "Login",
     "Signup": "Sign up",
     "CreateAccount": "Create an account",
-    "Email": "Email"
+    "Email": "Email",
+    "Name": "Name",
+    "YourEmail": "Your email address",
+    "Pending": "Connecting",
+    "LoginMessage": "Login with your email address. You'll be sent a One Time Password.",
+    "SignupMessage": "Create an account. You'll be sent a One Time Password.",
+    "InvalidEmail": "Invalid email",
+    "LoginOrSignup": "Login or create an account",
+    "ApiErrors": {
+      "USER_NOT_FOUND": "User not found",
+      "INVALID_EMAIL": "Invalid email",
+      "INTERNAL_ERROR": "Internal error"
+    }
   },
   "Navbar": {
     "Home": "Home",

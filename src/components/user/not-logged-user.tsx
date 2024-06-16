@@ -19,7 +19,7 @@ export default function NotLoggedUser({ locale }: { locale: string }) {
       <DropdownMenuTrigger asChild>
         {/* <Button variant="secondary" size="icon" className="rounded-full"> */}
         <CircleUser className="h-5 w-5 hover:scale-110">
-          <span className="sr-only">{t("ToggleUser")}</span>
+          {/* <span className="sr-only">{t("ToggleUser")}</span> */}
         </CircleUser>
 
         {/* </Button> */}

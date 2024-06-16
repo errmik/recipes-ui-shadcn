@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTranslations } from "next-intl";
 import { LoginForm } from "./login-form";
+import { SignupForm } from "./signup-form";
 
 export function Login() {
   const t = useTranslations("Login");
@@ -25,10 +26,8 @@ export function Login() {
       <TabsContent value="login">
         <Card>
           <CardHeader>
-            <CardTitle>{t("Login")}</CardTitle>
-            <CardDescription>
-              Make changes to your account here. Click save when you're done.
-            </CardDescription>
+            {/* <CardTitle>{t("Login")}</CardTitle> */}
+            <CardDescription>{t("LoginMessage")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             <LoginForm />
@@ -43,24 +42,17 @@ export function Login() {
       <TabsContent value="signup">
         <Card>
           <CardHeader>
-            <CardTitle>{t("Signup")}</CardTitle>
+            {/* <CardTitle>{t("Signup")}</CardTitle> */}
             <CardDescription>
-              Change your password here. After saving, you'll be logged out.
+              <CardDescription>{t("SignupMessage")}</CardDescription>
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
+            <SignupForm />
           </CardContent>
-          <CardFooter>
+          {/* <CardFooter>
             <Button className="w-full">Save password</Button>
-          </CardFooter>
+          </CardFooter> */}
         </Card>
       </TabsContent>
     </Tabs>

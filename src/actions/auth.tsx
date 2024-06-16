@@ -1,31 +1,42 @@
 "use server";
 
-import { StatusCodes } from "http-status-codes";
-
+/////////////////////
 //Server actions !
+/////////////////////
+import { StatusCodes } from "http-status-codes";
 import { redirect } from "next/navigation";
 import errorCodes from "@/constants/errorCodes.js";
 import { cookies } from "next/headers";
 import { LoginSchema } from "@/lib/form-schema";
+import { getTranslations } from "next-intl/server";
+import successCodes from "@/constants/successCodes";
 
+//Send a login query to the backend api.
 export const handleLogin = async (previousState: any, formData: FormData) => {
-  const email = formData.get("email");
+  const t = await getTranslations("Login");
 
+  //Transform form data to zod compatible format
   let zodFormData = Object.fromEntries(formData);
-  console.log(zodFormData);
 
-  const validation = LoginSchema.safeParse(zodFormData);
+  //Pass translation function to the zod schema
+  let formSchema = LoginSchema(t);
+
+  //Zod validation
+  const validation = formSchema.safeParse(zodFormData);
 
   if (!validation.success) {
     return {
       success: false,
       msg: "Email invalid",
       code: errorCodes.INVALID_EMAIL,
-      name: null,
-      email: null,
+      // name: null,
+      // email: null,
       errors: validation.error.issues,
     };
   }
+
+  //Get posted data
+  const email = formData.get("email");
 
   const requestOptions = {
     method: "POST",
@@ -34,37 +45,45 @@ export const handleLogin = async (previousState: any, formData: FormData) => {
   };
 
   try {
+    //Post login data to the backend api
     const response = await fetch(
       `${process.env.RECIPES_BACKEND_URL}/auth/login`,
       requestOptions
     );
 
+    //Response to json
     const data = await response.json();
 
-    if (response.status === StatusCodes.OK) {
-      console.log("SUCCESSS");
-
+    if (
+      response.status === StatusCodes.OK &&
+      data.code === successCodes.OTP_SENT
+    ) {
+      //Ok, Otp sent to email
       return {
         success: true,
-        msg: data.msg,
-        code: data.code,
-        name: data.name,
-        email: data.email,
+        ...data,
+        // msg: data.msg,
+        // code: data.code,
+        // name: data.name,
+        // email: data.email,
       };
     } else {
+      //Something's not right
       return {
         success: false,
-        msg: data.msg,
-        code: data.code,
-        name: null,
-        email: null,
+        ...data,
+        // msg: data.msg,
+        // code: data.code,
+        // name: null,
+        // email: null,
       };
     }
   } catch (err) {
+    //Something's not right
     return {
       success: false,
-      msg: "TODO",
-      code: "TODO",
+      msg: "Internal error",
+      code: errorCodes.INTERNAL_ERROR,
       name: null,
       email: null,
     };

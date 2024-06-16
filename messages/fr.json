@@ -9,7 +9,19 @@
     "Login": "Connexion",
     "Signup": "Inscription",
     "CreateAccount": "Créer un compte",
-    "Email": "Email"
+    "Email": "Email",
+    "Name": "Nom",
+    "YourEmail": "Votre aresse email",
+    "Pending": "Connexion",
+    "LoginMessage": "Connectez vous avec votre email. Un mot de passe à usage unique vous sera envoyé.",
+    "SignupMessage": "Créez un compte. Un mot de passe à usage unique vous sera envoyé.",
+    "InvalidEmail": "Email invalide",
+    "LoginOrSignup": "Connectez vous ou créez un compte",
+    "ApiErrors": {
+      "USER_NOT_FOUND": "Utilisateur inconnu",
+      "INVALID_EMAIL": "Email invalide",
+      "INTERNAL_ERROR": "Erreur indéterminée"
+    }
   },
   "Navbar": {
     "Home": "Accueil",

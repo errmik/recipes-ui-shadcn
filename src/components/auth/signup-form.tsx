@@ -2,7 +2,11 @@
 
 import React, { useState } from "react";
 import { handleLogin } from "@/actions/auth";
+import { useFormState, useFormStatus } from "react-dom";
+import { SubmitButton } from "../submitButton";
 import { useRouter } from "next/navigation";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,11 +15,13 @@ import { z } from "zod";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "../ui/form";
-import { LoginSchema } from "@/lib/form-schema";
+import { LoginSchema, SignupSchema } from "@/lib/form-schema";
 import { FloatingLabelInput } from "../floating-label-input";
 
 //TODO : use a type for
@@ -29,15 +35,16 @@ import { FloatingLabelInput } from "../floating-label-input";
 
 //Using Shadcn, zod and managing state
 //Can't use useFormState and useFromStatus with Shadcn yet
-export const LoginForm = () => {
+export const SignupForm = () => {
+  //TODO
+
   const t = useTranslations("Login");
 
-  //Pass the translation function to the Zod schema
-  const formSchema = LoginSchema(t);
+  const formSchema = SignupSchema(t);
 
   const form = useForm<z.output<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: { email: "" },
+    defaultValues: { email: "", name: "" },
   });
 
   let router = useRouter();
@@ -51,9 +58,7 @@ export const LoginForm = () => {
   });
 
   async function onSubmit(data: z.output<typeof formSchema>) {
-    //Form submission is pending
     setPending(true);
-    //Reset the errors : no errors so far
     setErrors({
       success: true,
       msg: "",
@@ -61,25 +66,26 @@ export const LoginForm = () => {
       name: null,
       email: null,
     });
-    //Get the posted data
     const formData = new FormData();
     formData.append("email", data.email);
 
-    //authenticate via function
     let res = await handleLogin(null, formData);
 
-    if (res && !res.success) {
-      //Something's not right
-      setErrors(res);
-      setPending(false);
-    } else {
-      //Ok, Otp sent
-      router.push(`/otp?email=${res.email}`);
-    }
+    setPending(false);
 
-    //Keep the pending state till the end ?
-    //setPending(false);
+    console.log(res);
+
+    if (res && !res.success) {
+      console.log(res);
+      setErrors(res);
+    } else router.push(`/otp?email=${res.email}`);
+
+    //redirect to otp
   }
+
+  const formRef = React.useRef<HTMLFormElement>(null);
+
+  // const { pending } = useFormStatus();
 
   const [pending, setPending] = useState(false);
 
@@ -92,11 +98,67 @@ export const LoginForm = () => {
         <div className="space-y-2">
           <FormField
             control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                {/* <FormLabel>{t("Email")}</FormLabel> */}
+                <FormControl>
+                  {/* <Input
+                    placeholder=""
+                    {...field}
+                    onKeyDown={() =>
+                      setErrors({
+                        success: true,
+                        msg: "",
+                        code: "",
+                        name: null,
+                        email: null,
+                      })
+                    }
+                  /> */}
+                  <FloatingLabelInput
+                    placeholder=""
+                    {...field}
+                    id="floating-name"
+                    label={t("Name")}
+                    onKeyDown={() =>
+                      setErrors({
+                        success: true,
+                        msg: "",
+                        code: "",
+                        name: null,
+                        email: null,
+                      })
+                    }
+                  />
+                </FormControl>
+                {/* <FormDescription>{t("YourEmail")}</FormDescription> */}
+                <FormMessage>
+                  {errors && !errors.success && t("ApiErrors." + errors.code)}
+                </FormMessage>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
                 {/* <FormLabel>{t("Email")}</FormLabel> */}
                 <FormControl>
+                  {/* <Input
+                    placeholder=""
+                    {...field}
+                    onKeyDown={() =>
+                      setErrors({
+                        success: true,
+                        msg: "",
+                        code: "",
+                        name: null,
+                        email: null,
+                      })
+                    }
+                  /> */}
                   <FloatingLabelInput
                     placeholder=""
                     {...field}
@@ -120,6 +182,7 @@ export const LoginForm = () => {
               </FormItem>
             )}
           />
+
           <Button
             type="submit"
             aria-disabled={pending}
@@ -128,6 +191,9 @@ export const LoginForm = () => {
           >
             {pending ? t("Pending") : t("Login")}
           </Button>
+          {/* <div className="">
+            <SubmitButton text={t("Login")} pendingMessage="Pending..." />
+          </div> */}
         </div>
       </form>
     </Form>

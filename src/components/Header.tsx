@@ -84,10 +84,7 @@ export async function Header({ locale }: HeaderProps) {
           <ThemeSwitcher locale={locale} />
           <LangSwitcher locale={locale} />
           {user ? (
-            <LoggedInUser
-              locale={locale}
-              // user={user}
-            />
+            <LoggedInUser locale={locale} userFromContext={user} />
           ) : (
             <NotLoggedUser locale={locale} />
           )}

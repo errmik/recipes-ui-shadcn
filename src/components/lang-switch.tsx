@@ -48,7 +48,7 @@ const LangSwitcher: React.FC<Props> = ({ locale }) => {
       <DropdownMenu open={false}>
         <DropdownMenuTrigger asChild>
           <Globe className="h-5 w-5">
-            <span className="sr-only">{t("ToggleLang")}</span>
+            {/* <span className="sr-only">{t("ToggleLang")}</span> */}
           </Globe>
         </DropdownMenuTrigger>
       </DropdownMenu>
@@ -58,7 +58,7 @@ const LangSwitcher: React.FC<Props> = ({ locale }) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="hover:scale-110">
         <Globe className="h-5 w-5">
-          <span className="sr-only">{t("ToggleLang")}</span>
+          {/* <span className="sr-only">{t("ToggleLang")}</span> */}
         </Globe>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

@@ -28,7 +28,7 @@ export default function ThemeSwitcher({ locale }: { locale: string }) {
       <DropdownMenu open={false}>
         <DropdownMenuTrigger asChild>
           <Sun className="h-5 w-5">
-            <span className="sr-only">{t("ToggleTheme")}</span>
+            {/* <span className="sr-only">{t("ToggleTheme")}</span> */}
           </Sun>
         </DropdownMenuTrigger>
       </DropdownMenu>
@@ -38,7 +38,7 @@ export default function ThemeSwitcher({ locale }: { locale: string }) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="hover:scale-110">
         <Sun className="h-5 w-5">
-          <span className="sr-only">{t("ToggleTheme")}</span>
+          {/* <span className="sr-only">{t("ToggleTheme")}</span> */}
         </Sun>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
