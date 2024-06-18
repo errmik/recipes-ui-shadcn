@@ -14,7 +14,11 @@ export const LoginSchema = (t: (arg: string) => string) =>
 
 export const SignupSchema = (t: (arg: string) => string) =>
   z.object({
-    name: z.string().trim().min(1).max(20),
+    name: z
+      .string()
+      .trim()
+      .min(1, { message: t("NameMinLength") })
+      .max(40, { message: t("NameMaxLength") }),
     email: z.string().email(t("InvalidEmail")),
   });
 

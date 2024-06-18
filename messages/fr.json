@@ -12,16 +12,17 @@
     "Email": "Email",
     "Name": "Nom",
     "YourEmail": "Votre aresse email",
-    "Pending": "Connexion",
+    "Pending": "En cours",
     "LoginMessage": "Connectez vous avec votre email. Un mot de passe à usage unique vous sera envoyé.",
     "SignupMessage": "Créez un compte. Un mot de passe à usage unique vous sera envoyé.",
     "InvalidEmail": "Email invalide",
     "LoginOrSignup": "Connectez vous ou créez un compte",
-    "ApiErrors": {
-      "USER_NOT_FOUND": "Utilisateur inconnu",
-      "INVALID_EMAIL": "Email invalide",
-      "INTERNAL_ERROR": "Erreur indéterminée"
-    }
+    "NameMinLength": "Le nom doit contenir au moins 1 caractère",
+    "NameMaxLength": "Le nom ne doit pas dépasser 40 caractères",
+    "USER_NOT_FOUND": "Utilisateur inconnu",
+    "USER_ALREADY_EXISTS": "Cet email est déjà utilisé",
+    "INVALID_EMAIL": "Email invalide",
+    "INTERNAL_ERROR": "Erreur indéterminée"
   },
   "Navbar": {
     "Home": "Accueil",

@@ -18,15 +18,6 @@ import {
 import { LoginSchema } from "@/lib/form-schema";
 import { FloatingLabelInput } from "../floating-label-input";
 
-//TODO : use a type for
-// {
-//   success: true,
-//   msg: "",
-//   code: "",
-//   name: null,
-//   email: null,
-// }
-
 //Using Shadcn, zod and managing state
 //Can't use useFormState and useFromStatus with Shadcn yet
 export const LoginForm = () => {
@@ -35,6 +26,7 @@ export const LoginForm = () => {
   //Pass the translation function to the Zod schema
   const formSchema = LoginSchema(t);
 
+  //Create the form using the zod validator
   const form = useForm<z.output<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { email: "" },
@@ -42,30 +34,24 @@ export const LoginForm = () => {
 
   let router = useRouter();
 
-  const [errors, setErrors] = React.useState({
+  const [errors, setErrors] = React.useState<LoginError>({
     success: true,
-    msg: "",
-    code: "",
-    name: null,
-    email: null,
   });
 
+  //Form submitted, data validated, now do the job
   async function onSubmit(data: z.output<typeof formSchema>) {
     //Form submission is pending
     setPending(true);
     //Reset the errors : no errors so far
     setErrors({
       success: true,
-      msg: "",
-      code: "",
-      name: null,
-      email: null,
     });
+
     //Get the posted data
     const formData = new FormData();
     formData.append("email", data.email);
 
-    //authenticate via function
+    //Authenticate
     let res = await handleLogin(null, formData);
 
     if (res && !res.success) {
@@ -115,7 +101,8 @@ export const LoginForm = () => {
                 </FormControl>
                 {/* <FormDescription>{t("YourEmail")}</FormDescription> */}
                 <FormMessage>
-                  {errors && !errors.success && t("ApiErrors." + errors.code)}
+                  {/* Explicitely set errors from Api. */}
+                  {errors && !errors.success && t(errors.code)}
                 </FormMessage>
               </FormItem>
             )}

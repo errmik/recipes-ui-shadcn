@@ -7,7 +7,7 @@ import { StatusCodes } from "http-status-codes";
 import { redirect } from "next/navigation";
 import errorCodes from "@/constants/errorCodes.js";
 import { cookies } from "next/headers";
-import { LoginSchema } from "@/lib/form-schema";
+import { LoginSchema, SignupSchema } from "@/lib/form-schema";
 import { getTranslations } from "next-intl/server";
 import successCodes from "@/constants/successCodes";
 
@@ -90,28 +90,50 @@ export const handleLogin = async (previousState: any, formData: FormData) => {
   }
 };
 
-export const handleSignup = async (previousState: any, formData: FormData) => {
+export const handleSignup = async (
+  previousState: any,
+  formData: FormData
+): Promise<SignupError> => {
+  const t = await getTranslations("Login");
+
+  //Transform form data to zod compatible format
+  let zodFormData = Object.fromEntries(formData);
+
+  //Pass translation function to the zod schema
+  let formSchema = SignupSchema(t);
+
+  //Zod validation
+  const validation = formSchema.safeParse(zodFormData);
+
+  //If zod did not validate the data
+  if (!validation.success) {
+    //errors on name ?
+    let nameErrors = validation.error.issues.filter((issue) =>
+      issue.path.includes("name")
+    );
+
+    //errors on email ?
+    let emailErrors = validation.error.issues.filter((issue) =>
+      issue.path.includes("email")
+    );
+
+    var errors: Record<string, string> = {};
+
+    if (nameErrors && nameErrors.length > 0)
+      errors["name"] = nameErrors.map((issue) => issue.message).join();
+
+    if (emailErrors && emailErrors.length > 0)
+      errors["email"] = emailErrors.map((issue) => issue.message).join();
+
+    return {
+      success: false,
+      msg: "Invalid data",
+      code: errorCodes.INVALID_DATA,
+      errors,
+    };
+  }
   const email = formData.get("email");
-
-  if (!email)
-    return {
-      success: false,
-      msg: "Email invalid",
-      code: errorCodes.INVALID_EMAIL,
-      name: null,
-      email: null,
-    };
-
   const name = formData.get("name");
-
-  if (!name)
-    return {
-      success: false,
-      msg: "Name invalid",
-      code: errorCodes.INVALID_NAME,
-      name: null,
-      email: null,
-    };
 
   const requestOptions = {
     method: "POST",
@@ -120,45 +142,40 @@ export const handleSignup = async (previousState: any, formData: FormData) => {
   };
 
   try {
+    //Post signup data to the backend api
     const response = await fetch(
       `${process.env.RECIPES_BACKEND_URL}/auth/signup`,
       requestOptions
     );
 
-    console.log(response);
-
     const data = await response.json();
 
-    console.log(data);
-
     if (response.status === StatusCodes.OK) {
-      console.log("SUCCESSS");
-
       return {
         success: true,
-        msg: data.msg,
-        code: data.code,
-        name: data.name,
-        email: data.email,
+        ...data,
       };
     } else {
-      console.log("SOMETHING WENT WRONG");
-
-      return {
-        success: false,
-        msg: data.msg,
-        code: data.code,
-        name: null,
-        email: null,
-      };
+      if (data.code == errorCodes.USER_ALREADY_EXISTS) {
+        return {
+          success: false,
+          ...data,
+          errors: { email: errorCodes.USER_ALREADY_EXISTS },
+        };
+      } else {
+        return {
+          success: false,
+          ...data,
+          errors: { global: data.code },
+        };
+      }
     }
   } catch (err) {
     return {
       success: false,
-      msg: "TODO",
-      code: "TODO",
-      name: null,
-      email: null,
+      msg: "Internal error",
+      code: errorCodes.INTERNAL_ERROR,
+      errors: { global: errorCodes.INTERNAL_ERROR },
     };
   }
 };
