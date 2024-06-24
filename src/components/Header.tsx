@@ -26,7 +26,8 @@ export async function Header({ locale }: HeaderProps) {
   let user = await getUser();
 
   return (
-    <header className="sticky top-0 z-50 bg-background w-full">
+    /* Header/Nav has a 70px fixed size to be able to offset some components nicely */
+    <header className="sticky top-0 z-50 bg-background w-full h-[70px]">
       <section className="mx-auto p-4 flex items-center justify-between">
         {/* nav bar for medium devices and up */}
         <nav className="hidden flex-col gap-6 font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">

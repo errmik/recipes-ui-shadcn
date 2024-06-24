@@ -184,13 +184,8 @@ export const handleVerifyOtp = async (
   previousState: any,
   formData: FormData
 ) => {
-  console.log(formData);
-
   const email = formData.get("email");
   const otp = formData.get("otp");
-
-  console.log(email);
-  console.log(otp);
 
   if (!email) {
     return {
@@ -296,7 +291,7 @@ export const getUser = async () => {
   var user = cookies().get("recipes_user");
   console.log(user);
 
-  if (!user) return null;
+  if (!user || !user.value) return null;
 
   return JSON.parse(user.value);
 };

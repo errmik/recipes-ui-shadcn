@@ -1,10 +1,14 @@
 "use client";
 import { capitalize } from "@/lib/utils";
 import Link from "next/link";
-import { usePathname, useSelectedLayoutSegments } from "next/navigation";
+import { Link as NextIntlLink } from "../navigation";
+import {
+  usePathname,
+  useSearchParams,
+  useSelectedLayoutSegments,
+} from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -26,6 +30,10 @@ const LangSwitcher: React.FC<Props> = ({ locale }) => {
   }
   const pathname = usePathname();
   const urlSegments = useSelectedLayoutSegments();
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+
+  console.log(params);
 
   const options: Option[] = [
     { country: "English", code: "en" }, // Native name is the same
@@ -75,11 +83,18 @@ const LangSwitcher: React.FC<Props> = ({ locale }) => {
             >
               <Link
                 key={"link-" + lang.code}
-                href={`/${lang.code}/${urlSegments.join("/")}`}
+                href={`/${lang.code}/${urlSegments.join("/")}?${params}`}
                 lang={locale}
               >
                 {capitalize(lang.country)}
               </Link>
+              {/* <NextIntlLink
+                key={"link-" + lang.code}
+                href={`/${urlSegments.join("/")}?${params}`}
+                lang={locale}
+              >
+                {capitalize(lang.country)}
+              </NextIntlLink> */}
             </DropdownMenuItem>
           );
         })}

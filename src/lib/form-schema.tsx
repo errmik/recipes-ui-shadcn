@@ -22,11 +22,12 @@ export const SignupSchema = (t: (arg: string) => string) =>
     email: z.string().email(t("InvalidEmail")),
   });
 
-export const OtpSchema = z.object({
-  otp: z.string().min(6, {
-    message: "Your one-time password must be 6 characters.",
-  }),
-});
+export const OtpSchema = (t: (arg: string) => string) =>
+  z.object({
+    otp: z.string().min(6, {
+      message: t("OtpMustBe6Chars"),
+    }),
+  });
 
 // export const BaseSchema = (t: (arg: string) => string) =>
 //   z.object({

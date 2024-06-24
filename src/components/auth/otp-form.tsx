@@ -1,12 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { handleLogin, handleVerifyOtp } from "@/actions/auth";
-import { useFormState, useFormStatus } from "react-dom";
-import { SubmitButton } from "../submitButton";
+import { handleVerifyOtp } from "@/actions/auth";
 import { useRouter } from "next/navigation";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -41,8 +37,11 @@ export const OtpForm = ({ email }: { email: string }) => {
 
   const t = useTranslations("Login");
 
-  const form = useForm<z.output<typeof OtpSchema>>({
-    resolver: zodResolver(OtpSchema),
+  //Pass the translation function to the Zod schema
+  const formSchema = OtpSchema(t);
+
+  const form = useForm<z.output<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: { otp: "" },
   });
 
@@ -55,7 +54,7 @@ export const OtpForm = ({ email }: { email: string }) => {
     user: null,
   });
 
-  async function onSubmit(data: z.output<typeof OtpSchema>) {
+  async function onSubmit(data: z.output<typeof formSchema>) {
     setPending(true);
     setErrors({
       success: true,
@@ -88,17 +87,13 @@ export const OtpForm = ({ email }: { email: string }) => {
     router.push("/");
   }
 
-  const formRef = React.useRef<HTMLFormElement>(null);
-
-  // const { pending } = useFormStatus();
-
   const [pending, setPending] = useState(false);
 
   return (
-    <Card className="max-w-[400px]">
+    <Card className="max-w-[400px] w-full">
       <CardHeader>
-        <CardTitle>Otp</CardTitle>
-        <CardDescription>Fill in your otp</CardDescription>
+        {/* <CardTitle>Otp</CardTitle> */}
+        <CardDescription>{t("FillYourOtp")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-2 items-center justify-center">
         <Form {...form}>
@@ -113,7 +108,7 @@ export const OtpForm = ({ email }: { email: string }) => {
                 name="otp"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Otp</FormLabel>
+                    {/* <FormLabel>Otp</FormLabel> */}
                     <FormControl>
                       <InputOTP
                         maxLength={6}
@@ -130,7 +125,7 @@ export const OtpForm = ({ email }: { email: string }) => {
                         </InputOTPGroup>
                       </InputOTP>
                     </FormControl>
-                    <FormDescription>Your one time password</FormDescription>
+                    <FormDescription>{t("YourOtp")}</FormDescription>
                     <FormMessage>
                       {errors && !errors.success && errors.msg}
                     </FormMessage>
@@ -143,7 +138,7 @@ export const OtpForm = ({ email }: { email: string }) => {
                 disabled={pending}
                 className="w-full"
               >
-                {pending ? "Pending..." : t("Login")}
+                {pending ? t("Pending") : t("Login")}
               </Button>
             </div>
           </form>

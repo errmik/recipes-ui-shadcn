@@ -6,7 +6,13 @@
     "Settings": "Settings"
   },
   "Login": {
+    "Welcome": "Welcome !",
+    "FillYourOtp": "Fill in your code",
+    "YourOtp": "Your one time password",
+    "YouveBeenSentAnOtp": "You've been sent a one time password to {email}",
+    "OtpMustBe6Chars": "One-time password must be 6 characters.",
     "Login": "Login",
+    "LoginWithGithub": "Login with Github",
     "Signup": "Sign up",
     "CreateAccount": "Create an account",
     "Email": "Email",

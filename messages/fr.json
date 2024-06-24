@@ -6,7 +6,13 @@
     "Settings": "Paramètres"
   },
   "Login": {
+    "Welcome": "Bienvenue !",
+    "FillYourOtp": "Saisissez votre code",
+    "YourOtp": "Votre code à usage unique",
+    "YouveBeenSentAnOtp": "Vous avez reçu un code à usage unique sur {email}",
+    "OtpMustBe6Chars": "Le code doit contenir 6 caractères",
     "Login": "Connexion",
+    "LoginWithGithub": "Connexion avec Github",
     "Signup": "Inscription",
     "CreateAccount": "Créer un compte",
     "Email": "Email",

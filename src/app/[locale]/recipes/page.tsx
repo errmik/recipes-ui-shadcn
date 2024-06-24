@@ -4,7 +4,7 @@ import { title } from "@/components/primitives";
 export default function RecipesPage() {
   return (
     <section className="w-full py-6 md:py-12 lg:py-16">
-      <div className="container grid gap-12 px-4 md:px-6">
+      <div className="container gap-12 px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
@@ -26,7 +26,7 @@ export default function RecipesPage() {
             />
             <div className="absolute inset-0 bg-gray-900/80 flex flex-col justify-end p-6 space-y-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
               <h3 className="text-2xl font-bold text-white">
-                Futuristic UI Design
+                Futuristic UI Design 1
               </h3>
               <p className="text-gray-300">
                 An innovative and visually striking UI design for a cutting-edge
@@ -44,7 +44,7 @@ export default function RecipesPage() {
             />
             <div className="absolute inset-0 bg-gray-900/80 flex flex-col justify-end p-6 space-y-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
               <h3 className="text-2xl font-bold text-white">
-                Minimalist Branding
+                Minimalist Branding 2
               </h3>
               <p className="text-gray-300">
                 A clean and modern branding design for a sustainable lifestyle
@@ -62,7 +62,7 @@ export default function RecipesPage() {
             />
             <div className="absolute inset-0 bg-gray-900/80 flex flex-col justify-end p-6 space-y-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
               <h3 className="text-2xl font-bold text-white">
-                Interactive Web Experience
+                Interactive Web Experience 3
               </h3>
               <p className="text-gray-300">
                 An engaging and immersive web experience that blends

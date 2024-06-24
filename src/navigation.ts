@@ -10,7 +10,7 @@ export const navlinks: { path: string; label: string }[] = [
   { path: "/", label: "Home" },
   { path: "/blog", label: "Blog" },
   { path: "/recipes", label: "Recipes" },
-  { path: "/ingredients", label: "Ingredients" },
+  { path: "/ingredients/search", label: "Ingredients" },
   { path: "/about", label: "About" },
 ];
 
@@ -19,7 +19,8 @@ export const pathnames = {
   "/": "/",
   "/blog": "/blog",
   "/recipes": "/recipes",
-  "/ingredients": "/ingredients",
+  "/ingredients/search": "/ingredients/search",
+  "/ingredients/a-z": "/ingredients/a-z",
   "/about": "/about",
 } satisfies Pathnames<typeof locales>;
 

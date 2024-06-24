@@ -1,5 +1,5 @@
 import { Login } from "@/components/auth/login";
-import { title } from "@/components/primitives";
+import LoginWithGitHub from "@/components/auth/loginWithGithub";
 import { getTranslations } from "next-intl/server";
 
 export default async function LoginPage() {
