@@ -10,14 +10,19 @@ export default async function AlphabeticalIngredientsPage({
   const ingredients = await getAllIngredients(locale);
 
   let groupedIngredients: { [key: string]: Ingredient[] } = {};
+  let atoz: string[] = [];
 
   if (ingredients) {
     for (let ingredient of ingredients) {
       if (!ingredient || !ingredient.name[locale]) continue;
 
       let firstChar = ingredient.name[locale]![0].toLowerCase();
+      //Remove diacritics
+      firstChar = firstChar.normalize("NFD").replace(/\p{Diacritic}/gu, "");
 
       if (!groupedIngredients[firstChar]) groupedIngredients[firstChar] = [];
+
+      if (!atoz.includes(firstChar)) atoz.push(firstChar);
 
       groupedIngredients[firstChar]?.push(ingredient);
     }
@@ -30,39 +35,22 @@ export default async function AlphabeticalIngredientsPage({
     orderedIngredients.push({ key, value });
   }
 
+  //Used to sort with diacritics
+  const collator = new Intl.Collator();
+
   return (
     <>
+      <nav className="flex items-center sticky top-[68px] z-50 bg-secondary h-[30px] px-1 mt-4 shadow-b rounded justify-center">
+        {atoz.map((letter) => {
+          return (
+            <div className="text-xs sm:text-sm lg:text-lg mx-0.5 sm:mx-1 md:mx-2">
+              <a href={`#${letter.toLowerCase()}`}>{letter.toUpperCase()}</a>
+            </div>
+          );
+        })}
+      </nav>
+
       <div className="flex">
-        {/* <div className="w-max flex content-end">
-        <div className="fixed top-15">
-          <div>A</div>
-          <div>B</div>
-          <div>C</div>
-          <div>D</div>
-          <div>E</div>
-          <div>F</div>
-          <div>G</div>
-          <div>H</div>
-          <div>I</div>
-          <div>J</div>
-          <div>K</div>
-          <div>L</div>
-          <div>M</div>
-          <div>N</div>
-          <div>O</div>
-          <div>P</div>
-          <div>Q</div>
-          <div>R</div>
-          <div>S</div>
-          <div>T</div>
-          <div>U</div>
-          <div>V</div>
-          <div>W</div>
-          <div>X</div>
-          <div>Y</div>
-          <div>Z</div>
-        </div>
-      </div> */}
         <div className="w-full">
           {orderedIngredients.map((group) => {
             let section = (
@@ -73,14 +61,24 @@ export default async function AlphabeticalIngredientsPage({
                 >
                   {group.key.toUpperCase()}
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-                  {group.value.map((ingredient) => {
-                    return (
-                      <Link href={`/ingredients/detail/${ingredient._id}`}>
-                        {ingredient.name[locale]}
-                      </Link>
-                    );
-                  })}
+                <div
+                  id={"div-" + group.key.toLowerCase()}
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2"
+                >
+                  {group.value
+                    .sort(function (a, b) {
+                      return collator.compare(
+                        a.name[locale] as string,
+                        b.name[locale] as string
+                      );
+                    })
+                    .map((ingredient) => {
+                      return (
+                        <Link href={`/ingredients/detail/${ingredient._id}`}>
+                          {ingredient.name[locale]}
+                        </Link>
+                      );
+                    })}
                 </div>
               </>
             );
@@ -88,43 +86,6 @@ export default async function AlphabeticalIngredientsPage({
             return section;
           })}
         </div>
-
-        <aside>
-          <nav className="flex flex-col items-center fixed top-0 mt-[70px] h-[90vh] overflow-y-auto">
-            <div>
-              <a href="#a">A</a>
-            </div>
-            <div>
-              <a href="#b">B</a>
-            </div>
-            <div>C</div>
-            <div>D</div>
-            <div>E</div>
-            <div>F</div>
-            <div>G</div>
-            <div>H</div>
-            <div>
-              <a href="#i">I</a>
-            </div>
-            <div>J</div>
-            <div>K</div>
-            <div>L</div>
-            <div>M</div>
-            <div>N</div>
-            <div>O</div>
-            <div>P</div>
-            <div>Q</div>
-            <div>R</div>
-            <div>S</div>
-            <div>T</div>
-            <div>U</div>
-            <div>V</div>
-            <div>W</div>
-            <div>X</div>
-            <div>Y</div>
-            <div>Z</div>
-          </nav>
-        </aside>
       </div>
       <ScrollToTop />
     </>

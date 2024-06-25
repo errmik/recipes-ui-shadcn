@@ -56,7 +56,7 @@
     --alert-foreground: 210 40% 98%;
   }
   html {
-    scroll-padding-top: 70px; /* height of sticky header, to scroll spot on with anchors in ingredients a-z page */
+    scroll-padding-top: 100px; /* height of sticky header + height of the alphabetic list, to scroll spot on with anchors in ingredients a-z page */
   }
   body {
     @apply text-foreground;

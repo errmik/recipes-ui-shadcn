@@ -18,6 +18,9 @@ const config = {
         "2xl": "1400px",
       },
     },
+    boxShadow: {
+      b: "0 5px 8px -1px rgba(0, 0, 0, 0.1)",
+    },
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
