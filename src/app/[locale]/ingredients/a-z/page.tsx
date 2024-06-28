@@ -43,7 +43,10 @@ export default async function AlphabeticalIngredientsPage({
       <nav className="flex items-center sticky top-[68px] z-50 bg-secondary h-[30px] px-1 mt-4 shadow-b rounded justify-center">
         {atoz.map((letter) => {
           return (
-            <div className="text-xs sm:text-sm lg:text-lg mx-0.5 sm:mx-1 md:mx-2">
+            <div
+              key={letter}
+              className="text-xs sm:text-sm lg:text-lg mx-0.5 sm:mx-1 md:mx-2"
+            >
               <a href={`#${letter.toLowerCase()}`}>{letter.toUpperCase()}</a>
             </div>
           );
@@ -52,19 +55,16 @@ export default async function AlphabeticalIngredientsPage({
 
       <div className="flex">
         <div className="w-full">
-          {orderedIngredients.map((group) => {
+          {orderedIngredients.map((group, index) => {
             let section = (
-              <>
-                <h2
-                  id={group.key.toLowerCase()}
-                  className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mt-6"
-                >
+              <section
+                key={group.key.toLowerCase()}
+                id={group.key.toLowerCase()}
+              >
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mt-6">
                   {group.key.toUpperCase()}
                 </h2>
-                <div
-                  id={"div-" + group.key.toLowerCase()}
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2"
-                >
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                   {group.value
                     .sort(function (a, b) {
                       return collator.compare(
@@ -72,15 +72,18 @@ export default async function AlphabeticalIngredientsPage({
                         b.name[locale] as string
                       );
                     })
-                    .map((ingredient) => {
+                    .map((ingredient, index) => {
                       return (
-                        <Link href={`/ingredients/detail/${ingredient._id}`}>
+                        <Link
+                          key={"link-" + index}
+                          href={`/ingredients/detail/${ingredient._id}`}
+                        >
                           {ingredient.name[locale]}
                         </Link>
                       );
                     })}
                 </div>
-              </>
+              </section>
             );
 
             return section;
