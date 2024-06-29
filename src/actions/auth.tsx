@@ -289,7 +289,6 @@ export const logOut = async () => {
 
 export const getUser = async () => {
   var user = cookies().get("recipes_user");
-  console.log(user);
 
   if (!user || !user.value) return null;
 

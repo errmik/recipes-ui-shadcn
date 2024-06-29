@@ -13,7 +13,6 @@ import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useUser } from "@/contexts/user-context";
 import { getUser, logOut } from "@/actions/auth";
-import { useRouter } from "next/router";
 
 export default function LoggedInUser({
   locale,

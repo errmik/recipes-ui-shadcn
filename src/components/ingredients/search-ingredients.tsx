@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, JSX, SVGProps } from "react";
+import { useDebouncedCallback } from "use-debounce";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -27,16 +28,18 @@ export default function SearchIngredients({ locale }: SearchProps) {
 
   //let ingredients = await autoCompleteIngredient("", params.locale);
 
-  function handleSearch(term: string) {
-    console.log(term);
+  const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
+
+    params.set("page", "1");
+
     if (term) {
       params.set("query", term);
     } else {
       params.delete("query");
     }
     replace(`${pathname}?${params.toString()}`);
-  }
+  }, 300);
 
   //   const [searchTerm, setSearchTerm] = useState("");
   //   const [selectedCategory, setSelectedCategory] = useState("all");
