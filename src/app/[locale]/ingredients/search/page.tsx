@@ -28,6 +28,8 @@ export default async function IngredientsSearchPage({
 
   let totalPages = Math.ceil((totalHits as number) / 12);
 
+  if (!totalPages) totalPages = 0;
+
   return (
     <div className="flex">
       <div className="w-full">

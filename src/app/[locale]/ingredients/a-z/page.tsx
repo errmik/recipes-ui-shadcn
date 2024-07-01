@@ -1,46 +1,49 @@
 import { getAllIngredients } from "@/actions/ingredients";
+import AToZIngredients from "@/components/ingredients/a-to-z-ingredients";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { IngredientsResultsSkeleton } from "@/components/skeletons/skeletons";
 import { Link } from "@/navigation";
+import { Suspense } from "react";
 
 export default async function AlphabeticalIngredientsPage({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
-  const ingredients = await getAllIngredients(locale);
+  // const ingredients = await getAllIngredients(locale);
 
-  let groupedIngredients: { [key: string]: Ingredient[] } = {};
-  let atoz: string[] = [];
+  // let groupedIngredients: { [key: string]: Ingredient[] } = {};
+  // let atoz: string[] = [];
 
-  if (ingredients) {
-    for (let ingredient of ingredients) {
-      if (!ingredient || !ingredient.name[locale]) continue;
+  // if (ingredients) {
+  //   for (let ingredient of ingredients) {
+  //     if (!ingredient || !ingredient.name[locale]) continue;
 
-      let firstChar = ingredient.name[locale]![0].toLowerCase();
-      //Remove diacritics
-      firstChar = firstChar.normalize("NFD").replace(/\p{Diacritic}/gu, "");
+  //     let firstChar = ingredient.name[locale]![0].toLowerCase();
+  //     //Remove diacritics
+  //     firstChar = firstChar.normalize("NFD").replace(/\p{Diacritic}/gu, "");
 
-      if (!groupedIngredients[firstChar]) groupedIngredients[firstChar] = [];
+  //     if (!groupedIngredients[firstChar]) groupedIngredients[firstChar] = [];
 
-      if (!atoz.includes(firstChar)) atoz.push(firstChar);
+  //     if (!atoz.includes(firstChar)) atoz.push(firstChar);
 
-      groupedIngredients[firstChar]?.push(ingredient);
-    }
-  }
+  //     groupedIngredients[firstChar]?.push(ingredient);
+  //   }
+  // }
 
-  let orderedIngredients = [];
+  // let orderedIngredients = [];
 
-  //Transform to array
-  for (const [key, value] of Object.entries(groupedIngredients)) {
-    orderedIngredients.push({ key, value });
-  }
+  // //Transform to array
+  // for (const [key, value] of Object.entries(groupedIngredients)) {
+  //   orderedIngredients.push({ key, value });
+  // }
 
-  //Used to sort with diacritics
-  const collator = new Intl.Collator();
+  // //Used to sort with diacritics
+  // const collator = new Intl.Collator();
 
   return (
     <>
-      <nav className="flex items-center sticky top-[68px] z-50 bg-secondary h-[30px] px-1 mt-4 shadow-b rounded justify-center">
+      {/* <nav className="flex items-center sticky top-[68px] z-50 bg-secondary h-[30px] px-1 mt-4 shadow-b rounded justify-center">
         {atoz.map((letter) => {
           return (
             <div
@@ -90,7 +93,14 @@ export default async function AlphabeticalIngredientsPage({
           })}
         </div>
       </div>
-      <ScrollToTop />
+      <ScrollToTop /> */}
+      <div className="flex">
+        <div className="w-full">
+          <Suspense key="atoz" fallback={<IngredientsResultsSkeleton />}>
+            <AToZIngredients locale={locale} />
+          </Suspense>
+        </div>
+      </div>
     </>
   );
 }

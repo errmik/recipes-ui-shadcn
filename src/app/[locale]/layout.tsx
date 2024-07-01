@@ -4,6 +4,7 @@ import {
   useMessages,
 } from "next-intl";
 import "@/styles/globals.css";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import NextTopLoader from "nextjs-toploader";
 import { Header } from "@/components/header";

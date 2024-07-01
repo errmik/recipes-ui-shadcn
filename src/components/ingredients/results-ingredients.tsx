@@ -27,6 +27,8 @@ export default async function IngredientsResults({
         )) as Ingredient[])
       : await getIngredients(locale, currentPage ? currentPage : 1, 12);
 
+  //await new Promise((resolve) => setTimeout(resolve, 5000));
+
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">

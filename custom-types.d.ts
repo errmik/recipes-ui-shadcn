@@ -49,5 +49,13 @@ type Ingredient = {
     zh: string | undefined | null;
   };
   photo: string;
+  calories: Number | undefined; //in kcal
+  carbs: Number | undefined; //in grams
+  protein: Number | undefined; //in grams
+  fat: Number | undefined; //in grams
+  cholesterol: Number | undefined; //in milligrams
+  sugar: Number | undefined; //in grams
+  sodium: Number | undefined; //in milligrams
+  fiber: Number | undefined; //in grams
   createdDate: Date;
 };

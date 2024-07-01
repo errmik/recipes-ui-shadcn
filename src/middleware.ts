@@ -17,8 +17,11 @@ export const config = {
     // all requests that have a locale prefix
     "/(fr|de|en)/:path*",
 
-    // Enable redirects that add missing locales
-    // (e.g. `/pathnames` -> `/en/pathnames`)
+    // Match all pathnames except for
+    // - … if they start with `/api`, `/_next` or `/_vercel`
+    // - … the ones containing a dot (e.g. `favicon.ico`)
+    //"/((?!api|_next|_vercel|.*\\..*).*)",
     "/((?!_next|_vercel|api|.*\\..*).*)",
+    // "/((?!api|_next/static|_next/image|favicon.ico).*)",
   ],
 };

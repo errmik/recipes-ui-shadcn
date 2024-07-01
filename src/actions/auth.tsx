@@ -294,3 +294,11 @@ export const getUser = async () => {
 
   return JSON.parse(user.value);
 };
+
+export const getAccessToken = async () => {
+  var token = cookies().get("recipes_access_token");
+
+  if (!token || !token.value) return null;
+
+  return token.value;
+};

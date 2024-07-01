@@ -45,3 +45,13 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     totalPages,
   ];
 };
+
+export const generateFlagFromLocale = (locale: string) => {
+  if (locale === "en") return "gb";
+
+  if (locale === "ca") return "es-ct";
+
+  //TODO
+
+  return locale;
+};

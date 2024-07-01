@@ -6,7 +6,11 @@ import { generatePagination } from "@/lib/utils";
 import { usePathname, useSearchParams } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-export default function Pagination({ totalPages }: { totalPages: number }) {
+export default function IngredientsPagination({
+  totalPages,
+}: {
+  totalPages: number;
+}) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get("page")) || 1;
