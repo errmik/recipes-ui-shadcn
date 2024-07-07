@@ -9,6 +9,7 @@ import langConstants from "../constants/lang";
 import successCodes from "@/constants/successCodes";
 import { StatusCodes } from "http-status-codes";
 import { getAccessToken } from "./auth";
+import { fetchWithRefresh } from "./fetch";
 
 export const getAllIngredients = async (
   lang: string
@@ -171,111 +172,62 @@ export const countAutoCompleteIngredient = async (
 };
 
 //UPDATES
-//Send a login query to the backend api.
+//Send an ingredient update query to the backend
+//This backend endpoint has to be authenticated
+//The acess token is in the cookies, so is the refresh token if needed
 export const updateIngredient = async (
-  // previousState: any,
+  previousState: any,
   formData: FormData
 ) => {
-  const id = formData.get("id") as string;
-  const locale = formData.get("locale") as string;
-  const name = formData.get("name") as string;
-  const description = formData.get("description") as string;
-  const calories = formData.get("calories") as string;
-  const fat = formData.get("fat") as string;
-  const carbs = formData.get("carbs") as string;
-  const sugar = formData.get("sugar") as string;
-  const protein = formData.get("protein") as string;
-  const sodium = formData.get("sodium") as string;
-  const cholesterol = formData.get("cholesterol") as string;
-  const fiber = formData.get("fiber") as string;
-
-  //var formDataz = Object.fromEntries(formData);
-
-  console.log(
-    id,
-    name,
-    description,
-    calories,
-    fat,
-    carbs,
-    sugar,
-    protein,
-    sodium,
-    cholesterol,
-    fiber
-  );
-
-  // const t = await getTranslations("Login");
-  // //Transform form data to zod compatible format
-  // let zodFormData = Object.fromEntries(formData);
-  // //Pass translation function to the zod schema
-  // let formSchema = LoginSchema(t);
-  // //Zod validation
-  // const validation = formSchema.safeParse(zodFormData);
-  // if (!validation.success) {
-  //   return {
-  //     success: false,
-  //     msg: "Email invalid",
-  //     code: errorCodes.INVALID_EMAIL,
-  //     // name: null,
-  //     // email: null,
-  //     errors: validation.error.issues,
-  //   };
-  // }
-  // //Get posted data
-  // const email = formData.get("email");
-
-  //Get access token from cookies
-  var token = await getAccessToken();
-
-  //todo check
+  let entries = Object.fromEntries(formData);
 
   var body = JSON.stringify({
-    calories: calories.replace(",", "."),
-    fat: fat.replace(",", "."),
-    carbs: carbs.replace(",", "."),
-    sugar: sugar.replace(",", "."),
-    protein: protein.replace(",", "."),
-    sodium: sodium.replace(",", "."),
-    cholesterol: cholesterol.replace(",", "."),
-    fiber: fiber.replace(",", "."),
+    photo: entries.photo.toString(),
+    calories: entries.calories.toString().replace(",", "."),
+    fat: entries.fat.toString().replace(",", "."),
+    carbs: entries.carbs.toString().replace(",", "."),
+    sugar: entries.sugar.toString().replace(",", "."),
+    protein: entries.protein.toString().replace(",", "."),
+    sodium: entries.sodium.toString().replace(",", "."),
+    cholesterol: entries.cholesterol.toString().replace(",", "."),
+    fiber: entries.fiber.toString().replace(",", "."),
+    //Example : name.fr
     name: {
-      [locale]: name,
+      [entries.locale.toString()]: entries.name.toString(),
     },
+    //Example : description.fr
     description: {
-      [locale]: description,
+      [entries.locale.toString()]: entries.description.toString(),
     },
   });
 
-  // var body = JSON.stringify({
-  //   calories: calories.replace(",", "."),
-  //   fat: fat.replace(",", "."),,
-  //   carbs: carbs.replace(",", "."),,
-  //   sugar: sugar.replace(",", "."),,
-  //   protein: protein.replace(",", "."),,
-  //   sodium: sodium.replace(",", "."),,
-  //   cholesterol: cholesterol.replace(",", "."),,
-  //   fiber: fiber.replace(",", "."),,
-  // });
+  //TODO : if backend responds Unauthorized, try refreshing the acess token and redo the query
+  //https://medium.com/@fran_wrote/fetch-with-token-and-refresh-in-next-js-60fd13c6f1b1
 
   const requestOptions = {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    // headers: {
+    //   "Content-Type": "application/json",
+    //   Authorization: `Bearer ${token}`,
+    // },
     body: body,
   };
   try {
-    //Post login data to the backend api
-    const response = await fetch(
-      `${process.env.RECIPES_BACKEND_URL}/ingredients/${id}`,
+    const response = await fetchWithRefresh(
+      `${process.env.RECIPES_BACKEND_URL}/ingredients/${entries.id}`,
       requestOptions
     );
+
+    // const response = await fetch(
+    //   `${process.env.RECIPES_BACKEND_URL}/ingredients/${id}`,
+    //   requestOptions
+    // );
     //Response to json
-    const data = await response.json();
+    const data = response.response;
+    //const data = await response.json();
+    //const data = await response.json();
     if (
-      response.status === StatusCodes.OK
+      response.response.status === StatusCodes.OK
       // &&
       // data.code === successCodes.OTP_SENT
     ) {
@@ -309,4 +261,10 @@ export const updateIngredient = async (
       email: null,
     };
   }
+};
+
+export const deleteIngredient = async (id: string) => {
+  console.log("deleting " + id);
+
+  await new Promise((resolve) => setTimeout(resolve, 3000));
 };

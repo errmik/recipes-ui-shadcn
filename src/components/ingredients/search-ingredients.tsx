@@ -67,71 +67,10 @@ export default function SearchIngredients({ locale }: SearchProps) {
                 <SearchIcon className="w-5 h-5" />
               </Button>
             </div>
-            {/* <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="flex items-center ml-auto">
-                  <FilterIcon className="w-5 h-5" />
-                  <span>Filter by category</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Filter by category</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuCheckboxItem
-                  checked={selectedCategory === "all"}
-                  onCheckedChange={() => setSelectedCategory("all")}
-                >
-                  All
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                  checked={selectedCategory === "breakfast"}
-                  onCheckedChange={() => setSelectedCategory("breakfast")}
-                >
-                  Breakfast
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                  checked={selectedCategory === "lunch"}
-                  onCheckedChange={() => setSelectedCategory("lunch")}
-                >
-                  Lunch
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                  checked={selectedCategory === "dinner"}
-                  onCheckedChange={() => setSelectedCategory("dinner")}
-                >
-                  Dinner
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                  checked={selectedCategory === "dessert"}
-                  onCheckedChange={() => setSelectedCategory("dessert")}
-                >
-                  Dessert
-                </DropdownMenuCheckboxItem>
-              </DropdownMenuContent>
-            </DropdownMenu> */}
           </div>
         </div>
       </search>
     </>
-  );
-}
-
-function FilterIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-    </svg>
   );
 }
 

@@ -226,31 +226,7 @@ export const handleVerifyOtp = async (
       console.log("SUCCESSS");
 
       //Set cookies
-      //expires: new Date(response.session.expiresAt),
-      let accessToken = data.accessToken;
-      cookies().set("recipes_access_token", data.accessToken, {
-        httpOnly: true,
-        sameSite: "none",
-        secure: true,
-        maxAge: 10 * 60 * 1000,
-        path: "/",
-      });
-
-      cookies().set("recipes_refresh_token", data.refreshToken, {
-        httpOnly: true,
-        sameSite: "none",
-        secure: true,
-        maxAge: 24 * 60 * 60 * 1000,
-        path: "/",
-      });
-
-      cookies().set("recipes_user", JSON.stringify(data.user), {
-        httpOnly: true,
-        sameSite: "none",
-        secure: true,
-        maxAge: 24 * 60 * 60 * 1000,
-        path: "/",
-      });
+      saveTokensAfterLogin(data);
 
       return {
         success: true,
@@ -276,15 +252,40 @@ export const handleVerifyOtp = async (
   }
 };
 
-export const logOut = async () => {
-  console.log("Clearing cookies");
-  cookies().delete("recipes_user");
-  cookies().delete("recipes_access_token");
-  cookies().delete("recipes_refresh_token");
+export const saveTokensAfterLogin = async (data: LoginSuccessData) => {
+  cookies().set("recipes_access_token", data.accessToken as string, {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+    maxAge: 10 * 60 * 1000,
+    path: "/",
+  });
 
-  //TODO : backend logout
+  cookies().set("recipes_refresh_token", data.refreshToken as string, {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+    maxAge: 24 * 60 * 60 * 1000,
+    path: "/",
+  });
 
-  redirect("/");
+  cookies().set("recipes_user", JSON.stringify(data.user), {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+    maxAge: 24 * 60 * 60 * 1000,
+    path: "/",
+  });
+};
+
+export const saveTokensAfterRefresh = async (data: any) => {
+  cookies().set("recipes_access_token", data.accessToken as string, {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+    maxAge: 10 * 60 * 1000,
+    path: "/",
+  });
 };
 
 export const getUser = async () => {
@@ -301,4 +302,22 @@ export const getAccessToken = async () => {
   if (!token || !token.value) return null;
 
   return token.value;
+};
+
+export const getRefreshToken = async () => {
+  var token = cookies().get("recipes_refresh_token");
+
+  if (!token || !token.value) return null;
+
+  return token.value;
+};
+
+export const logOut = async () => {
+  cookies().delete("recipes_user");
+  cookies().delete("recipes_access_token");
+  cookies().delete("recipes_refresh_token");
+
+  //TODO : backend logout
+
+  redirect("/");
 };

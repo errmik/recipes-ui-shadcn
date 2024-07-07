@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
   autoCompleteIngredient,
   getAllIngredients,
@@ -33,7 +33,7 @@ export default async function IngredientsResults({
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
         {ingredients!.map((ingredient) => (
-          <Card key={ingredient._id}>
+          <Card key={ingredient._id} className="rounded">
             <Link
               // key={"link-" + index}
               href={`/ingredients/detail/${ingredient._id}`}
@@ -47,7 +47,7 @@ export default async function IngredientsResults({
                 alt={ingredient.name[locale] as string}
                 width={300}
                 height={300}
-                className="object-cover w-full h-48 rounded-t-lg"
+                className="object-cover w-full h-48 rounded-t"
               />
             </Link>
 
@@ -61,6 +61,16 @@ export default async function IngredientsResults({
                   (ingredient.description[locale] as string)}
               </p>
             </CardContent>
+            {/* <CardFooter className="p-4 flex flex-col">
+              <h3 className="text-lg font-semibold mb-2">
+                {ingredient.name[locale] as string}
+              </h3>
+              <p className="text-sm text-muted-foreground line-clamp-2">
+                {ingredient.description &&
+                  ingredient.description[locale] &&
+                  (ingredient.description[locale] as string)}
+              </p>
+            </CardFooter> */}
           </Card>
         ))}
       </div>

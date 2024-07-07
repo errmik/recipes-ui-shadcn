@@ -15,6 +15,30 @@ type SignupError = {
   errors?: Record<string, string> | null | undefined;
 };
 
+type LoginSuccessData = {
+  success: boolean;
+  msg: string;
+  code: string;
+  accessToken: string | null | undefined;
+  refreshToken?: string | null | undefined;
+  user: {
+    userId: string;
+    name: string;
+    email: string;
+    avatar: string;
+  };
+};
+
+type RefreshTokenSuccessData = {
+  success: boolean;
+  code: string;
+  msg: string;
+  userId: user._id;
+  name: user.name;
+  email: user.email;
+  accessToken: string | null | undefined;
+};
+
 type Ingredient = {
   _id: string;
   alcoholic: boolean | undefined | null;

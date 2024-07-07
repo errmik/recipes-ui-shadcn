@@ -7,8 +7,31 @@ import { useTranslations } from "next-intl";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import { getIngredient, updateIngredient } from "@/actions/ingredients";
+import { updateIngredient } from "@/actions/ingredients";
 import { FloatingLabelInput } from "../floating-label-input";
+import { useFormState, useFormStatus } from "react-dom";
+import { toast } from "sonner";
+import { UploadButton } from "@/utils/uploadthing";
+import { Link } from "@/navigation";
+
+let toastDuration = 2000;
+let defaultImage = "https://placehold.co/300x300/png";
+
+interface Props {
+  pendingMessage: string;
+  text: string;
+}
+
+function SubmitButton(props: Props) {
+  const { pending } = useFormStatus();
+  return (
+    <Button type="submit" aria-disabled={pending} disabled={pending}>
+      <span className="font-semibold text-white">
+        {pending ? props.pendingMessage : props.text}
+      </span>
+    </Button>
+  );
+}
 
 export const IngredientForm = ({
   ingredient,
@@ -19,166 +42,208 @@ export const IngredientForm = ({
 }) => {
   const t = useTranslations("Login");
 
-  return (
-    <form action={updateIngredient} className="space-y-6">
-      <Input id="id" name="id" type="hidden" defaultValue={ingredient?._id} />
-      <Input id="locale" name="locale" type="hidden" defaultValue={locale} />
-      <div className="grid md:grid-cols-2 gap-8 max-w-7xl py-6">
-        <div className="flex flex-col gap-4">
-          <Image
-            src={
-              ingredient?.photo
-                ? ingredient.photo
-                : "https://placehold.co/300x300/png"
-            }
-            alt="Ingredient Image"
-            width={600}
-            height={600}
-            className="object-cover w-full rounded"
-          />
-        </div>
+  const [imageUrl, setImageUrl] = useState(ingredient?.photo);
 
-        <div className="flex flex-col gap-4">
-          <div>
-            <Label htmlFor="name">Name</Label>
-            <Input
-              id="name"
-              name="name"
-              type="text"
-              defaultValue={
-                ingredient?.name && ingredient?.name[locale]
-                  ? (ingredient?.name[locale] as string)
-                  : ""
-              }
-            >
-              {/* {ingredient?.name[locale]} */}
-            </Input>
-          </div>
-          <div>
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              id="description"
-              name="description"
-              defaultValue={
-                ingredient?.description && ingredient?.description[locale]
-                  ? (ingredient?.description[locale] as string)
-                  : ""
-              }
-              className="min-h-[100px]"
+  const [updateResults, formAction] = useFormState(updateIngredient, null);
+
+  //Runs every time the updateResults variablee is modified (each time the form action returns new state)
+  useEffect(() => {
+    if (!updateResults) return;
+
+    if (updateResults.success) {
+      toast.success("Updated !", {
+        duration: toastDuration,
+        description: updateResults.msg,
+      });
+    } else {
+      //if Unauthorized, logout and redirect to login
+      toast.error("Something happened", {
+        duration: toastDuration,
+        description: updateResults.code + ":" + updateResults.msg,
+      });
+    }
+  }, [updateResults]);
+
+  return (
+    <>
+      <div className="flex justify-end w-full">
+        <Button variant="outline" className="w-16">
+          <Link href={`/ingredients/detail/${ingredient?._id}`}>Back</Link>
+          {/* Edit */}
+        </Button>
+      </div>
+      <form action={formAction} className="space-y-6">
+        <Input id="id" name="id" type="hidden" defaultValue={ingredient?._id} />
+        <Input id="locale" name="locale" type="hidden" defaultValue={locale} />
+        <Input
+          id="photo"
+          name="photo"
+          type="hidden"
+          defaultValue={
+            imageUrl !== defaultImage ? (imageUrl as string) : undefined
+          }
+        />
+
+        <div className="grid md:grid-cols-2 gap-8 max-w-7xl py-6">
+          <div className="flex flex-col gap-4">
+            <Image
+              src={imageUrl ? imageUrl : defaultImage}
+              alt="Ingredient Image"
+              width={600}
+              height={600}
+              className="object-cover w-full rounded"
+              // placeholder="blur"
+            />
+            <UploadButton
+              className="ut-label:NO"
+              endpoint="imageUploader"
+              onClientUploadComplete={(res) => {
+                // Do something with the response
+                console.log("Files: ", res);
+                setImageUrl(res[0].url);
+                //alert("Upload Completed");
+              }}
+              onUploadError={(error: Error) => {
+                // Do something with the error.
+                console.log(`ERROR! ${error.message}`);
+              }}
             />
           </div>
 
-          {/* calories: { type: Number }, //in kcal
-  carbs: { type: Number }, //in grams
-  protein: { type: Number }, //in grams
-  fat: { type: Number }, //in grams
-  cholesterol: { type: Number }, //in milligrams
-  sugar: { type: Number }, //in grams
-  sodium: { type: Number }, //in milligrams
-  fiber: { type: Number }, //in grams */}
+          <div className="flex flex-col gap-4">
+            <div>
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                name="name"
+                type="text"
+                defaultValue={
+                  ingredient?.name && ingredient?.name[locale]
+                    ? (ingredient?.name[locale] as string)
+                    : ""
+                }
+              >
+                {/* {ingredient?.name[locale]} */}
+              </Input>
+            </div>
+            <div>
+              <Label htmlFor="description">Description</Label>
+              <Textarea
+                id="description"
+                name="description"
+                defaultValue={
+                  ingredient?.description && ingredient?.description[locale]
+                    ? (ingredient?.description[locale] as string)
+                    : ""
+                }
+                className="min-h-[100px]"
+              />
+            </div>
 
-          <div className="bg-muted p-4">
-            <h2>Nutrition Facts (for 100g)</h2>
+            <div className="bg-muted p-4">
+              <h2>Nutrition Facts (for 100g)</h2>
 
-            <div className="grid grid-cols-2 gap-4 p-4">
-              {/* className="grid gap-2" */}
+              <div className="grid grid-cols-2 gap-4 p-4">
+                {/* className="grid gap-2" */}
 
-              <div>
-                {/* <Label htmlFor="calories">Calories (kcal)</Label> */}
-                <FloatingLabelInput
-                  id="calories"
-                  name="calories"
-                  label="Calories (kcal)"
-                  type="decimal"
-                  defaultValue={ingredient?.calories as number}
-                  className="bg-background"
-                />
-              </div>
-              <div>
-                {/* <Label htmlFor="fat">Fat (g)</Label> */}
-                <FloatingLabelInput
-                  id="fat"
-                  name="fat"
-                  label="Fat (g)"
-                  type="decimal"
-                  defaultValue={ingredient?.fat as number}
-                  className="bg-background"
-                />
-              </div>
-              <div>
-                {/* <Label htmlFor="carbs">Carbs (g)</Label> */}
-                <FloatingLabelInput
-                  id="carbs"
-                  name="carbs"
-                  label="Carbs (g)"
-                  type="decimal"
-                  defaultValue={ingredient?.carbs as number}
-                  className="bg-background"
-                />
-              </div>
-              <div>
-                {/* <Label htmlFor="sugar">Sugar (g)</Label> */}
-                <FloatingLabelInput
-                  id="sugar"
-                  name="sugar"
-                  label="Sugar (g)"
-                  type="decimal"
-                  defaultValue={ingredient?.sugar as number}
-                  className="bg-background"
-                />
-              </div>
+                <div>
+                  {/* <Label htmlFor="calories">Calories (kcal)</Label> */}
+                  <FloatingLabelInput
+                    id="calories"
+                    name="calories"
+                    label="Calories (kcal)"
+                    type="decimal"
+                    defaultValue={ingredient?.calories as number}
+                    className="bg-background"
+                  />
+                </div>
+                <div>
+                  {/* <Label htmlFor="fat">Fat (g)</Label> */}
+                  <FloatingLabelInput
+                    id="fat"
+                    name="fat"
+                    label="Fat (g)"
+                    type="decimal"
+                    defaultValue={ingredient?.fat as number}
+                    className="bg-background"
+                  />
+                </div>
+                <div>
+                  {/* <Label htmlFor="carbs">Carbs (g)</Label> */}
+                  <FloatingLabelInput
+                    id="carbs"
+                    name="carbs"
+                    label="Carbs (g)"
+                    type="decimal"
+                    defaultValue={ingredient?.carbs as number}
+                    className="bg-background"
+                  />
+                </div>
+                <div>
+                  {/* <Label htmlFor="sugar">Sugar (g)</Label> */}
+                  <FloatingLabelInput
+                    id="sugar"
+                    name="sugar"
+                    label="Sugar (g)"
+                    type="decimal"
+                    defaultValue={ingredient?.sugar as number}
+                    className="bg-background"
+                  />
+                </div>
 
-              <div>
-                {/* <Label htmlFor="protein">Protein (g)</Label> */}
-                <FloatingLabelInput
-                  id="protein"
-                  name="protein"
-                  label="Protein (g)"
-                  type="decimal"
-                  defaultValue={ingredient?.protein as number}
-                  className="bg-background"
-                />
-              </div>
-              <div>
-                {/* <Label htmlFor="cholesterol">Cholesterol (mg)</Label> */}
-                <FloatingLabelInput
-                  id="cholesterol"
-                  name="cholesterol"
-                  label="Cholesterol (mg)"
-                  type="decimal"
-                  defaultValue={ingredient?.cholesterol as number}
-                  className="bg-background"
-                />
-              </div>
-              <div>
-                {/* <Label htmlFor="sodium">Sodium (mg)</Label> */}
-                <FloatingLabelInput
-                  id="sodium"
-                  name="sodium"
-                  label="Sodium (mg)"
-                  type="decimal"
-                  defaultValue={ingredient?.sodium as number}
-                  className="bg-background"
-                />
-              </div>
-              <div>
-                {/* <Label htmlFor="fiber">Fiber (g)</Label> */}
-                <FloatingLabelInput
-                  id="fiber"
-                  name="fiber"
-                  label="Fiber (g)"
-                  type="decimal"
-                  defaultValue={ingredient?.fiber as number}
-                  className="bg-background"
-                />
+                <div>
+                  {/* <Label htmlFor="protein">Protein (g)</Label> */}
+                  <FloatingLabelInput
+                    id="protein"
+                    name="protein"
+                    label="Protein (g)"
+                    type="decimal"
+                    defaultValue={ingredient?.protein as number}
+                    className="bg-background"
+                  />
+                </div>
+                <div>
+                  {/* <Label htmlFor="cholesterol">Cholesterol (mg)</Label> */}
+                  <FloatingLabelInput
+                    id="cholesterol"
+                    name="cholesterol"
+                    label="Cholesterol (mg)"
+                    type="decimal"
+                    defaultValue={ingredient?.cholesterol as number}
+                    className="bg-background"
+                  />
+                </div>
+                <div>
+                  {/* <Label htmlFor="sodium">Sodium (mg)</Label> */}
+                  <FloatingLabelInput
+                    id="sodium"
+                    name="sodium"
+                    label="Sodium (mg)"
+                    type="decimal"
+                    defaultValue={ingredient?.sodium as number}
+                    className="bg-background"
+                  />
+                </div>
+                <div>
+                  {/* <Label htmlFor="fiber">Fiber (g)</Label> */}
+                  <FloatingLabelInput
+                    id="fiber"
+                    name="fiber"
+                    label="Fiber (g)"
+                    type="decimal"
+                    defaultValue={ingredient?.fiber as number}
+                    className="bg-background"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <Button type="submit" className="ml-auto">
+            <SubmitButton pendingMessage="Updating..." text="Save ingredient" />
+            {/* <Button type="submit" className="ml-auto">
             Save Ingredient
-          </Button>
+          </Button> */}
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </>
   );
 };
